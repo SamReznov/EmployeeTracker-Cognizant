@@ -35,6 +35,10 @@ public class Role {
     @ManyToMany(mappedBy = "roleSet")
     private Set<Project> projectSet=new HashSet<>();
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
+    private List<User> userList=new ArrayList<>();
+
     @PreRemove
     public void preRemove(){
 
@@ -45,6 +49,11 @@ public class Role {
             project.getRoleSet().remove(this);
         }
 
+        for (User user : userList) {
+            user.getRoles().remove(this);
+        }
+
     }
 
+}
 }
