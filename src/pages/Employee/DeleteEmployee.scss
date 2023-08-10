@@ -1,0 +1,14 @@
+.addTopSpace {
+  margin-top: 30px;
+}
+
+.wrap-delete {
+  display: flex;
+  justify-content: flex-start;
+  .btn {
+    margin-left: 12px;
+  }
+  .input-text {
+    padding: 4px 12px;
+  }
+}

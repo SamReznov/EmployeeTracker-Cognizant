@@ -1,0 +1,21 @@
+.roleText{
+    flex:4;
+    text-align: center;
+    padding-top: 10px;
+}
+.roleCard{
+    display: flex;
+    background-color: cadetblue;
+    height: auto;
+    width: auto;
+    text-align: center;
+    border-radius: 25px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+.roleCardCloseButton{
+    flex:1;
+    text-align: end;
+    padding-right: 5px;
+    padding-top: 10px;
+}

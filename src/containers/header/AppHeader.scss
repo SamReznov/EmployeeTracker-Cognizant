@@ -1,0 +1,48 @@
+.app-header {    
+    padding: 0.5rem 1.5rem;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items:last baseline;
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+    min-width: 100%;
+    flex: 0 1 auto;
+}
+
+.app-title-left {
+    flex: 1;
+   
+}
+.app-title-center {
+    flex: 1;
+    text-align: center;
+}
+
+
+.app-links {
+    display: flex;
+    text-decoration: underline;
+    .nav-link {
+        margin: 0 1rem;
+        color: #000048;
+        font-weight: 400;
+    }
+}
+
+.right-style{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.element-style-right{
+    margin-right: 16px;
+    margin-left: 0px;
+    flex: 1;
+    
+}
+
+.sub-header {
+    width: 100;
+    display: block;
+}

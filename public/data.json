@@ -1,0 +1,4 @@
+[{"id":"1","firs_name": "Umesh Kumar","last_name":"Yadav","Ofclocation": "kolkata","gender": "name","city": "kolkata","state": "WestBengal", "country": "India","email": "umesh@example.com","phone": "091-37728455","cell": "0946-570-0600"},
+{"id":"2","firs_name": "Srijita","last_name":"Misra","Ofclocation": "kolkata","gender": "name","city": "kolkata","state": "WestBengal", "country": "India","email": "srijita@example.com","phone": "091-37728455","cell": "0946-570-0600"},
+{"id":"3","firs_name": "Jyothsna","last_name":"Maddi","Ofclocation": "kolkata","gender": "name","city": "kolkata","state": "WestBengal", "country": "India","email": "jyotishna@example.com","phone": "091-37728455","cell": "0946-570-0600"},
+{"id":"4","firs_name": "Senthil","last_name":"Sugumar","Ofclocation": "kolkata","gender": "name","city": "kolkata","state": "WestBengal", "country": "India","email": "Senthil@example.com","phone": "091-37728455","cell": "0946-570-0600"}]

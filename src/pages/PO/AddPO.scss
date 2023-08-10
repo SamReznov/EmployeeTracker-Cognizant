@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper {
+    padding: 20px;
+    width: 80%;
+    background-color: white;
+}
+
+.submit-button {
+    width:40%;
+    border:none;
+    margin-top: 20px;
+    color:white;
+    cursor: pointer;
+    margin: 20px 10px 0 0;
+}
+.form-style{
+    display: flex;
+    flex-wrap: wrap
+    }
+.input-style{
+    flex:1;
+    min-width: 40%;
+    margin:20px 10px 0px 0px;
+    padding: 10px;
+}
+.error-message{
+    font-style: normal;
+    font-family: sans-serif;
+    color: #f10606;
+}
