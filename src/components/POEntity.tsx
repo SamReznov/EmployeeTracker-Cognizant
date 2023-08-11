@@ -50,7 +50,7 @@ const POEntity = (props:poInterface) => {
           {}
         </div> */}
 
-        {/* <div className="flex-row btnFlex">
+        <div className="flex-row btnFlex">
           <button
             className="btn-update"
             onClick={() => {
@@ -59,7 +59,7 @@ const POEntity = (props:poInterface) => {
           >
             UPDATE
           </button>
-        </div> */}
+        </div>
 
         <div className="flex-row accordion">
           <div className="accordion-item">

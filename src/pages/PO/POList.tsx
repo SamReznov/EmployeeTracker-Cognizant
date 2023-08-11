@@ -57,6 +57,10 @@ const POList = () => {
             </div>
 
             <div className="flex-row" role="columnheader">
+              Update Operation
+            </div>
+
+            <div className="flex-row" role="columnheader">
               Extra Detail
             </div>
   

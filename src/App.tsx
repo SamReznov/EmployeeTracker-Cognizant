@@ -74,7 +74,7 @@ function App() {
 
             <Route path="/deletePO" element={<DeletePO/>}/> 
             <Route path="/addPO" element={<AddPO/>}/>     
-            <Route path="/updatePO" element={<UpdatePO/>}/>   
+            <Route path="/updatePO/:id" element={<UpdatePO/>}/>   
 
             <Route path="/addProject" element={<AddProject/>}/>
             <Route path="/updateProject/:id" element={<UpdateProject/>}/>
