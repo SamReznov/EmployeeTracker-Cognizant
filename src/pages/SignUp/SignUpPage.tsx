@@ -136,23 +136,23 @@ const SignUpPage = () => {
 
         <MDBRow>
 
-          <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
+          <MDBCol md='5' className='text-center text-md-start d-flex flex-column justify-content-center'>
 
-            <h1 className="my-5 display-3 fw-bold ls-tight px-3">
+            <h1 className="my-4 display-3 fw-bold ls-tight px-3">
               Cognizant <br />
               <span className="text-primary">Intuition Engineered</span>
             </h1>
 
-            <p className='paraStyle px-3' >
+            <p className='text-color px-3' >
             Cognizant's streamlined signup page offers a seamless onboarding experience, combining user-friendly design with robust security measures. Join our community effortlessly and unlock a world of opportunities with just a few clicks. Your journey with Cognizant starts here.
             </p>
 
           </MDBCol>
 
-          <MDBCol md='6'>
+          <MDBCol md='7'>
 
-            <MDBCard className='bg-dark text-white my-5 mx-auto my-5'>
-              <MDBCardBody className='p-5'>
+            <MDBCard className='bg-light text-color my-4 mx-auto'>
+              <MDBCardBody className='p-3'>
 
                 <MDBRow>
                   <MDBCol col='6'>
@@ -175,33 +175,16 @@ const SignUpPage = () => {
                 <MDBInput wrapperClass='mb-4' name='password' value={userdata.password} label='Password' id='form1' type='password' onChange={onChangeHandler}/>
                 <p className="error-message">{formErrors.password}</p>
 
-                <div className='d-flex justify-content-center mb-4'>
-                  {/* <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' /> */}
-                </div>
-
-                <Button className='w-100 mb-4' onClick={onSubmitHandler}>Sign Up</Button>
-
-                <div className="text-center">
-
-                  <p>or sign up with:</p>
-
-                  <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                    <FacebookIcon/>
-                  </MDBBtn>
-
-                  <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                    <TwitterIcon/>
-                  </MDBBtn>
-
-                  <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                    <GoogleIcon/>
-                  </MDBBtn>
-
-                  <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                    <GitHubIcon/>
-                  </MDBBtn>
-
-                </div>
+                <MDBRow>
+                  <MDBCol col='6'>
+                    <Button className='w-100 mb-6 primary' onClick={onSubmitHandler}>Sign Up</Button>
+                  </MDBCol>
+                  <MDBCol col='6'>
+                    <Button className='w-100 mb-4 btn-secondary' onClick={()=>{navigate('/login')}} >
+                        Back to Login
+                    </Button>
+                  </MDBCol>
+                </MDBRow>
 
               </MDBCardBody>
             </MDBCard>

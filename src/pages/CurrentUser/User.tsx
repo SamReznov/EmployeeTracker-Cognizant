@@ -78,24 +78,13 @@ function User() {
         })
     },[])
 
-    // const clickHandler=()=>{
-    //     console.log(headers)
-    //     console.log(header2)
-    //     console.log(headers3)
-    //     console.log(header2==headers3)
-    // }
-
     
   return (
-
-    
     <div>
         <div className='align-right text-center'>
-        {currentUser}
-        {/* <button onClick={clickHandler}>User</button> */}
-        </div>
-        <div className='text-center'>
-        {employee.po?.account.accName}
+        <span className="user-email font-14">{currentUser}</span>
+        <span className="text-color font-10">Account: <i className="text-color font-10">{employee.po?.account.accName}</i>
+        </span>
         </div>
         
     </div>

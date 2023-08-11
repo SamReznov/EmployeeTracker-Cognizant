@@ -78,6 +78,8 @@ function EmployeeList() {
   return (
 
       <div>
+        <div className="displayFlex">
+          <span>Employee filter per project</span>
           <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic" >
             {selectedProjectName}
@@ -93,6 +95,7 @@ function EmployeeList() {
 
           </Dropdown.Menu>
     </Dropdown>
+       </div>
       
       <div className="table-container" role="table" aria-label="Destinations">
         <div className="flex-table header" role="rowgroup">
@@ -109,7 +112,7 @@ function EmployeeList() {
           </div>
 
           <div className="flex-row" role="columnheader">
-            Ofc Location
+            Location
           </div>
 
           <div className="flex-row" role="columnheader">

@@ -362,12 +362,14 @@ const AddEmp = () => {
         <div>
           <AppHeader/>
           <div className="container">
-            <div className="'row p-5'">
-                <div className='card col-md-6 offset-md-3 offset-md-3 p-4 '>
+           
+                <div>
                     <h2 className="text-center p-2">Add New Employee</h2>
-                    <div className='card-body'>
-                        <form className="form-style">
+                    </div>
+                    <div className='w-100'> 
+                    <form className="form-style">
                             <div className='form-group p-2'>
+                            <label>Employee Id: </label>
                                 <input
                                     className="input-style"
                                     placeholder="Id"
@@ -380,6 +382,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                        <label>First Name: </label>
                                 <input
                                     className="input-style"
                                     placeholder="First Name"
@@ -392,6 +395,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                        <label>Last Name: </label>
                                 <input
                                     className="input-style"
                                     placeholder="Last Name"
@@ -404,6 +408,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                        <label>Email: </label>
                                 <input
                                     className="input-style"
                                     placeholder="Email"
@@ -416,6 +421,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                        <label>Phone: </label>
                                 <input
                                     className="input-style"
                                     placeholder="Phone"
@@ -428,6 +434,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                        <label>Phone: </label>
                                 <input
                                     className="input-style"
                                     placeholder="Location"
@@ -440,6 +447,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                    <label>Emp Start date: </label>
                                 <input
                                     type="date"
                                     className="input-style"
@@ -453,6 +461,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                    <label>Emp End Date: </label>
                                 <input
                                     type="date"
                                     className="input-style"
@@ -465,6 +474,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                    <label>Team Name: </label>
                                 <input
                                     className="input-style"
                                     placeholder="Team"
@@ -477,6 +487,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                    <label>Project Name: </label>
                                 <select name="project" onChange={(e) => {
                                     setValidation({ ...validation, project: e.target.value })
                                     setSelectedProject(projects?.find((x) => x.projectName === e.target.value));
@@ -501,6 +512,7 @@ const AddEmp = () => {
 
 
                             <div className='form-group p-2'>
+                    <label>Role Name: </label>
                                 <select name="role" onChange={(e) => {
                                     setValidation({ ...validation, role: e.target.value })
                                     const r = roles?.find((x) => x.roleName === e.target.value);
@@ -521,6 +533,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                    <label>Service Area/Line: </label>
                                 <select name="service" onChange={(e) => {
                                     setValidation({ ...validation, service: e.target.value })
                                     const s = services?.find((x) => x.serviceName === e.target.value);
@@ -542,6 +555,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                    <label>PO Name: </label>
                                 <select name="po" defaultValue={""} onChange={(e) => {
                                     setValidation({ ...validation, po: e.target.value })
                                     const p = pos?.find((x) => x.poNumber === Number(e.target.value));
@@ -563,6 +577,7 @@ const AddEmp = () => {
                             </div>
 
                             <div className='form-group p-2'>
+                    <label>Billing/Rate card: </label>
                                 <select name="esaRateCard" onChange={(e) => {
                                     setValidation({ ...validation, esaRateCard: e.target.value })
                                     const esa = esaRates?.find((x) => x.esaValue === Number(e.target.value));
@@ -583,12 +598,14 @@ const AddEmp = () => {
                                 <p className="error-message">{formErrors.esaRateCard}</p>
                             </div>
 
-
-
                             <div className='form-group p-2'>
-                                <label htmlFor="projectSiteLocation">Project Site Location</label>
-                                <input type="radio" name="projectSiteLocation" value={"OFF"} onChange={onChangeHandler} />OFF
-                                <input type="radio" name="projectSiteLocation" value={"ON"} onChange={onChangeHandler} />ON
+                        <label className="proj-location">Project Site Location</label>
+                        <span className="ui-radio">
+                            <input type="radio" name="projectSiteLocation" value={"OFF"} 
+                                onChange={onChangeHandler} /></span>Offshore                        
+                        <span className="ui-radio">
+                            <input type="radio" name="projectSiteLocation" value={"ON"} 
+                                onChange={onChangeHandler} /></span>Onsite                        
                                 <p className="error-message">{formErrors.projectSiteLocation}</p>
                             </div>
 
@@ -604,8 +621,7 @@ const AddEmp = () => {
                             
                         </form>
                     </div>
-                </div>
-            </div>
+             
 
             <ToastContainer />
         </div>

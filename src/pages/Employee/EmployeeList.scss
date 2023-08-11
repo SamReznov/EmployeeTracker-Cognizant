@@ -3,3 +3,13 @@
     position: relative;
     border: none;
 }
+
+.displayFlex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;;
+    align-items: center;
+    .dropdown {
+        width: 50%;
+    }
+}

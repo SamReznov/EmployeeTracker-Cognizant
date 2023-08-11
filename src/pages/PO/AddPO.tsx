@@ -190,11 +190,12 @@ const AddPO = () => {
     <>
     <AppHeader/>
     <div className="container">
-      <div className="wrapper">
+      <div className="w-100">
         <h2>Add New PO</h2>
 
         <form className="form-style">
-          <div>
+          <div className='form-group p-2'>
+            <label>PO Number: </label>  
             <input
               className="input-style"
               placeholder="PO Number"
@@ -206,7 +207,8 @@ const AddPO = () => {
             <p className="error-message">{formErrors.poNumber}</p>
           </div>
 
-          <div>
+          <div className='form-group p-2'>
+            <label>PO Manager: </label>  
             <input
               className="input-style"
               placeholder="PO Manager"
@@ -218,7 +220,8 @@ const AddPO = () => {
             <p className="error-message">{formErrors.poManager}</p>
           </div>
 
-          <div>
+          <div className='form-group p-2'>
+            <label>Issue Date: </label>  
             <input
               type="date"
               className="input-style"
@@ -231,7 +234,8 @@ const AddPO = () => {
             <p className="error-message">{formErrors.dateIssued}</p>
           </div>
 
-          <div>
+          <div className='form-group p-2'>
+            <label>Expiry Date: </label>  
             <input
               type="date"
               className="input-style"
@@ -244,7 +248,8 @@ const AddPO = () => {
             <p className="error-message">{formErrors.expiryDate}</p>
           </div>
 
-          <div>
+          <div className='form-group p-2'>
+            <label>Extension Date: </label>  
             <input
               type="date"
               className="input-style"
@@ -257,18 +262,8 @@ const AddPO = () => {
             <p className="error-message">{formErrors.extension}</p>
           </div>
 
-          {/* <div>
-            <input
-              className="input-style"
-              placeholder="Account Id"
-              name="accountId"
-              value={po.accountId}
-              onChange={onChangeHandler}
-            />
-
-            <p className="error-message">{formErrors.accountId}</p>
-          </div> */}
-          <div>
+          <div className='form-group p-2'>
+            <label>Account: </label>  
             <select name="account" onChange={(e)=>{
                 setValidation({...validation,account:e.target.value})
                 const a = accounts?.find((x) => x.accountId === Number(e.target.value));
