@@ -106,9 +106,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 nUser.setLastName(user.getLastName());
                 nUser.setEmail(user.getEmail());
 
-                Role role = new Role();
+                Role role = roleService.findByName("#N/A");
                 Set<Role> roleSet = new HashSet<>();
-                //roleSet.add(role);
+                roleSet.add(role);
 
                 if(user.getEmail().split("@")[1].equals("coolbasket.in")){//function to set as project manager
                     role = roleService.findByName("Project Manger");
