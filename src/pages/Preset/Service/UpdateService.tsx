@@ -3,6 +3,8 @@ import { useNavigate, useParams} from 'react-router-dom';
 import './UpdateService.scss';
 import { ToastContainer, toast} from "react-toastify";
 import ServicesService from '../../../servises/ServicesService';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 interface serviceInterface{
     serviceId: string|undefined,
@@ -106,6 +108,7 @@ function UpdateService() {
     
   return (
     <div>
+        <AppHeader/>
         <div className='container'>
             <div className='row p-2'>
                 <div className='card'>
@@ -130,6 +133,7 @@ function UpdateService() {
             </div>
         </div>
         <ToastContainer />
+        <AppFooter/>
     </div>
   )
 }

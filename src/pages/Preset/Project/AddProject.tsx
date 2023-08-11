@@ -6,6 +6,8 @@ import { projectInterface, roleInterface } from '../../../dataIntefaces/interfac
 import ProjectService from '../../../servises/ProjectService';
 import RoleService from '../../../servises/RoleService';
 import { CloseButton } from 'react-bootstrap';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 function AddProject() {
     const initialValues={
@@ -84,6 +86,7 @@ function AddProject() {
     
   return (
     <div>
+        <AppHeader/>
         <div className='container'>
             <div className='row p-2'>
                 <div className='col card'>
@@ -113,6 +116,7 @@ function AddProject() {
             </div>
         </div>
         <ToastContainer />
+        <AppFooter/>
     </div>
   )
 }

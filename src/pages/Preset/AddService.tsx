@@ -1,10 +1,13 @@
 import React from "react";
 import './AddService.scss';
+import AppHeader from "../../containers/header/AppHeader";
+import AppFooter from "../../containers/footer/AppFooter";
 
 
 function AddService() {
     return(
     <div>
+      <AppHeader/>
       <div className="Id">
         <label>Enter your Service Id: </label>
         <input
@@ -28,6 +31,7 @@ function AddService() {
             />
         
         </div>
+        <AppFooter/>
     </div>
     );
 }

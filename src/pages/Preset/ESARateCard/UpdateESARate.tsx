@@ -3,6 +3,8 @@ import { useNavigate, useParams} from 'react-router-dom';
 import './UpdateESARate.scss';
 import { ToastContainer, toast} from "react-toastify";
 import EsaRateCardService from '../../../servises/EsaRateCardService';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 interface esaRateInterface{
     esaAlphanumericValue: string|undefined,
@@ -105,6 +107,7 @@ function UpdateESARate() {
     
   return (
     <div>
+        <AppHeader/>
         <div className='container'>
             <div className='row p-2'>
                 <div className='card'>
@@ -129,6 +132,7 @@ function UpdateESARate() {
             </div>
         </div>
         <ToastContainer />
+        <AppFooter/>
     </div>
   )
 }

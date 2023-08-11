@@ -1,10 +1,13 @@
 import React from "react";
 import './AddAccount.scss';
+import AppHeader from "../../containers/header/AppHeader";
+import AppFooter from "../../containers/footer/AppFooter";
 
 
 function AddAccount() {
     return(
     <div>
+      <AppHeader/>
       <div className="Id">
         <label>Enter your Account Id: </label>
         <input
@@ -28,6 +31,7 @@ function AddAccount() {
             />
         
         </div>
+        <AppFooter/>
     </div>
     );
 }

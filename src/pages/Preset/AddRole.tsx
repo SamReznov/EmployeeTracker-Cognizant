@@ -1,10 +1,13 @@
 import React from "react";
 import './AddRole.scss';
+import AppHeader from "../../containers/header/AppHeader";
+import AppFooter from "../../containers/footer/AppFooter";
 
 
 function AddRole() {
     return(
     <div>
+      <AppHeader/>
       <div className="Id">
         <label>Enter your Role Id: </label>
         <input
@@ -28,6 +31,7 @@ function AddRole() {
             />
         
         </div>
+        <AppFooter/>
     </div>
     );
 }

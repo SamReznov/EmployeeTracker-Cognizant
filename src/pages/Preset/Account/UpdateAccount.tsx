@@ -3,6 +3,8 @@ import { useNavigate, useParams} from 'react-router-dom';
 import './UpdateAccount.scss';
 import { ToastContainer, toast} from "react-toastify";
 import AccountService from '../../../servises/AccountService';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 interface accountInterface{
     accountId: string|undefined,
@@ -106,6 +108,7 @@ function UpdateAccount() {
     
   return (
     <div>
+        <AppHeader/>
         <div className='container'>
             <div className='row p-2'>
                 <div className='card'>
@@ -130,6 +133,8 @@ function UpdateAccount() {
             </div>
         </div>
         <ToastContainer />
+        <AppFooter/>
+
     </div>
   )
 }

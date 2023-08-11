@@ -3,6 +3,7 @@ import { useNavigate,useParams} from 'react-router-dom';
 import { ToastContainer, toast} from "react-toastify";
 import AccountService from '../../../servises/AccountService';
 
+
 interface accountInterface{
     accountId: string,
     accName: string
@@ -58,6 +59,7 @@ function AccountList() {
     
   return (
     <div>
+       
         <h2 className='text-center p-4'>Account List</h2>
         <div className='text-center col-md-6 offset-md-3 offset-md-3'>
             <button className='btn btn-outline-primary' onClick={addAccount}>Add Account</button>

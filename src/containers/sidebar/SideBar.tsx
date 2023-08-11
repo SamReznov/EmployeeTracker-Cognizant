@@ -56,8 +56,8 @@ const SideBar = ({label,routes}:PropsType) => {
         {user && show1 && show2 && <Button className="element-style"variant="outline-info" onClick={onClickHandlerUpdate}>UPDATE {label}</Button>}{' '}
         {user && show1 && <Button className="element-style"variant="outline-danger" onClick={onClickHandlerDelete}>DELETE {label}</Button>}{' '}
         
-        {user && !show1 && <Button className="element-style" variant="outline-success" onClick={onClickHandlerAdd}>ADD ROLE TO PROJECT {label} </Button>}{' '} 
-        {user && !show1 && <Button className="element-style"variant="outline-info" onClick={onClickHandlerUpdate}>ADD SERVICE TO PROJECT {label}</Button>}{' '}
+        {user && !show1 && <Button className="element-style" variant="outline-success" onClick={()=>{console.log("Update Role Clicked")}}>ADD ROLE TO PROJECT {label} </Button>}{' '} 
+        {user && !show1 && <Button className="element-style"variant="outline-info" onClick={()=>{console.log("Update Service Clicked")}}>ADD SERVICE TO PROJECT {label}</Button>}{' '}
           
       </div>
     );

@@ -4,6 +4,8 @@ import './AddService.scss';
 import { ToastContainer, toast} from "react-toastify";
 import AccountService from '../../../servises/AccountService';
 import ServicesService from '../../../servises/ServicesService';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 function AddService() {
     const initialValues={
@@ -81,6 +83,7 @@ function AddService() {
     
   return (
     <div>
+        <AppHeader/>
         <div className='container'>
             <div className='row p-2'>
                 <div className='card'>
@@ -106,6 +109,7 @@ function AddService() {
             </div>
         </div>
         <ToastContainer />
+        <AppFooter/>
     </div>
   )
 }

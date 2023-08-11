@@ -7,6 +7,8 @@ import { roleInterface, serviceInterface } from '../../../dataIntefaces/interfac
 import RoleService from '../../../servises/RoleService';
 import { CloseButton } from 'react-bootstrap';
 import ServicesService from '../../../servises/ServicesService';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 interface projectInterface{
     projectId: string|undefined,
@@ -171,6 +173,7 @@ function UpdateProject() {
     
   return (
     <div>
+        <AppHeader/>
     <div className='container'>
         <div className='row p-2'>
 
@@ -259,6 +262,7 @@ function UpdateProject() {
         </div>
     </div>
     <ToastContainer />
+    <AppFooter/>
 </div>
   )
 }

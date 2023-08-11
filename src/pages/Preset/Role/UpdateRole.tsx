@@ -3,6 +3,8 @@ import { useNavigate, useParams} from 'react-router-dom';
 import './UpdateRole.scss';
 import { ToastContainer, toast} from "react-toastify";
 import RoleService from '../../../servises/RoleService';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 interface roleInterface{
     roleId: string|undefined,
@@ -106,6 +108,7 @@ function UpdateRole() {
     
   return (
     <div>
+        <AppHeader/>
         <div className='container'>
             <div className='row p-2'>
                 <div className='card'>
@@ -130,6 +133,7 @@ function UpdateRole() {
             </div>
         </div>
         <ToastContainer />
+        <AppFooter/>
     </div>
   )
 }

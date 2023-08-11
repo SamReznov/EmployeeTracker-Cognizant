@@ -601,11 +601,13 @@ const AddEmp = () => {
                             <div className='form-group p-2'>
                         <label className="proj-location">Project Site Location</label>
                         <span className="ui-radio">
-                            <input type="radio" name="projectSiteLocation" value={"OFF"} 
-                                onChange={onChangeHandler} /></span>Offshore                        
+                            <input type="radio" name="projectSiteLocation" value={"OFF"}  onChange={onChangeHandler} />
+                            Offshore
+                        </span>                        
                         <span className="ui-radio">
-                            <input type="radio" name="projectSiteLocation" value={"ON"} 
-                                onChange={onChangeHandler} /></span>Onsite                        
+                            <input type="radio" name="projectSiteLocation" value={"ON"} onChange={onChangeHandler} />
+                            Onsite  
+                        </span>                      
                                 <p className="error-message">{formErrors.projectSiteLocation}</p>
                             </div>
 

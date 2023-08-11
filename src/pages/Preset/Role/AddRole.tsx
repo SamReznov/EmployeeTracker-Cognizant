@@ -3,6 +3,8 @@ import { useNavigate} from 'react-router-dom';
 import './AddRole.scss';
 import { ToastContainer, toast} from "react-toastify";
 import RoleService from '../../../servises/RoleService';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 function AddRole() {
     const initialValues={
@@ -80,6 +82,7 @@ function AddRole() {
     
   return (
     <div>
+        <AppHeader/>
         <div className='container'>
             <div className='row p-2'>
                 <div className='card'>
@@ -105,6 +108,7 @@ function AddRole() {
             </div>
         </div>
         <ToastContainer />
+        <AppFooter/>
     </div>
   )
 }

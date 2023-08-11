@@ -1,10 +1,13 @@
 import React from "react";
 import './AddEsaRatecard.scss';
+import AppHeader from "../../containers/header/AppHeader";
+import AppFooter from "../../containers/footer/AppFooter";
 
 
 function AddEsaRatecard() {
     return(
     <div>
+      <AppHeader/>
       <div className="Id">
         <label>Enter your EsaValue: </label>
         <input
@@ -28,6 +31,7 @@ function AddEsaRatecard() {
             />
         
         </div>
+        <AppFooter/>
     </div>
     );
 }

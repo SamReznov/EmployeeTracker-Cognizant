@@ -5,6 +5,8 @@ import { ToastContainer, toast} from "react-toastify";
 import AccountService from '../../../servises/AccountService';
 import EsaRateCardService from '../../../servises/EsaRateCardService';
 import ESARateCardList from './ESARateCardList';
+import AppHeader from '../../../containers/header/AppHeader';
+import AppFooter from '../../../containers/footer/AppFooter';
 
 function AddESARate() {
     const initialValues={
@@ -82,6 +84,7 @@ function AddESARate() {
     
   return (
     <div>
+        <AppHeader/>
         <div className='container'>
             <div className='row p-2'>
                 <div className='card'>
@@ -107,6 +110,7 @@ function AddESARate() {
             </div>
         </div>
         <ToastContainer />
+        <AppFooter/>
     </div>
   )
 }
