@@ -50,8 +50,8 @@ class EmployeeService{
 
 
 
-    updateEmployee(employee:any){
-        axios.put(EMPLOYEE_API_BASE_URL,employee);
+   async updateEmployee(employee:any){
+        return await axios.put(EMPLOYEE_API_BASE_URL,employee);
     }
 
 
