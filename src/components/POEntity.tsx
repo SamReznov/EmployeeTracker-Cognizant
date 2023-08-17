@@ -35,12 +35,13 @@ const POEntity = (props:poInterface) => {
         </div>
 
         <div className="flex-row" role="cell">
-          {props.expiryDate?.substring(0,10)}
+          {props.expiryDate?.substring(0,10)}.
         </div>
 
         <div className="flex-row" role="cell">
-          {props.extension != null ? props.extension:"Null"}
+          {props.extension != null ? props.extension.substring(0,10):"Null"}
         </div>
+        
 
        
         {/* <div className="flex-row" role="cell">
@@ -79,11 +80,11 @@ const POEntity = (props:poInterface) => {
       <div>
         <div className={folded == true ? "content" : "content show"}>
           <section >
-            <ul className='collapsableView'>
-              <li>Account Id: {props?.account?.accountId}</li>
-              <li>Account Name: {props?.account?.accName}</li>
-              <li>Full Issued Date: {props?.dateIssued}</li>
-              <li>Full Expiry Date: {props?.expiryDate}</li>
+            <ul className='custom-ul'>
+              <li className="align-left"><span className="font-14 w-40">Account Id: </span><span className="font-14">{props?.account?.accountId}</span></li>
+              <li className="align-left"><span className="font-14 w-40">Account Name: </span><span className="font-14">{props?.account?.accName}</span></li>
+              <li className="align-left"><span className="font-14 w-40">Full Issued Date: </span><span className="font-14">{props?.dateIssued.substring(0,10)}</span></li>
+              <li className="align-left"><span className="font-14 w-40">Full Expiry Date: </span><span className="font-14">{props?.expiryDate.substring(0,10)}</span></li>
             </ul>
           </section>
         </div>

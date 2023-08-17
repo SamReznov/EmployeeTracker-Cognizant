@@ -50,6 +50,8 @@ div {
         background: $table-header;
         color: white;
         border-color: $table-header-border;
+        line-height: 16px;
+        font-size: 16px;
     }
 
     &.row:nth-child(odd) .flex-row {
@@ -75,6 +77,7 @@ div {
     padding: 0.5em 0.5em;
     border-right: solid 1px $table-border;
     border-bottom: solid 1px $table-border;
+    font-size: 16px;
 }
 
 .rowspan {

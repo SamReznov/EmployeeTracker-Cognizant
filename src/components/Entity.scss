@@ -205,3 +205,20 @@ div {
     height: auto;
     max-height: 9999px;
 }
+
+.custom-ul {
+    list-style: none;
+    columns: 2;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #d9d9d9;
+}
+
+.align-left {
+    text-align: left;
+    display: flex;
+}
+
+.w-40 {
+    width: 40%;
+}

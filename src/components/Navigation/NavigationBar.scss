@@ -1,25 +1,25 @@
 .navigationBar{
-display: flex;
-justify-content: center;
-padding-bottom: 5px;
-}
-.navButton{
-    flex:1;
-    text-align: center;
-    border: 1cm;
-    color:whitesmoke;
-    font: sans-serif;
-    background: #f2f2f0;
-    border: 0.5px solid rgb(52, 75, 251);
-    border-radius:2px;
-    padding: 5px;
-    color: grey;
-    cursor: pointer;
-    &:hover {
-        font-weight: bold;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5px;
     }
-    transition: all 0.3s ease; 
-    &.active {
-        background: none;
+    .navButton{
+        flex:1;
+        text-align: center;
+        border: 1cm;
+        color:whitesmoke;
+        font: sans-serif;
+        background: #f2f2f0;
+        border: 0.5px solid rgb(52, 75, 251);
+        border-radius:2px;
+        padding: 5px;
+        color: grey;
+        cursor: pointer;
+        &:hover {
+            font-weight: bold;
+        }
+        transition: all 0.3s ease; 
+        &.active {
+            background: none;
+        }
     }
-}

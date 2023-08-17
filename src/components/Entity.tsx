@@ -61,18 +61,18 @@ const Entity = (props: employeeInterface) => {
       <div>
         <div className={folded == true ? "content" : "content show"}>
           <section >
-            <ul className="collapsableView">
-              <li>Full Name: {props?.empFirstName +" "+ props?.empLastName}</li>
+            <ul className="custom-ul">
+              <li className="align-left"><span className="font-14 w-40">Full Name: </span><span className="font-14">{props?.empFirstName +" "+ props?.empLastName}</span></li>
               
-              <li>Email: {props?.empEmail}</li>
+              <li className="align-left"><span className="font-14 w-40">Email: </span><span className="font-14">{props?.empEmail}</span></li>
 
-              <li>Phone: {props?.empPhone}</li>
+              <li className="align-left"><span className="font-14 w-40">Phone: </span><span className="font-14">{props?.empPhone}</span></li>
 
-              <li>Team: {props?.teamName}</li>
+              <li className="align-left"><span className="font-14 w-40">Team: </span><span className="font-14">{props?.teamName}</span></li>
 
-              <li>Start Date: {props?.empStartDate}</li>
+              <li className="align-left"><span className="font-14 w-40">Start Date: </span><span className="font-14">{props?.empStartDate}</span></li>
 
-              <li>End Date: {props?.empEndDate}</li>
+              <li className="align-left"><span className="font-14 w-40">End Date: </span><span className="font-14">{props?.empEndDate}</span></li>
             </ul>
           </section>
         </div>
