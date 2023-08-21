@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeDao extends JpaRepository<Employee,Long> {
 
     Page<Employee> findByProject(Project project,Pageable page);
+    Page<Employee> findByEmpFirstNameContaining(String name,Pageable page);
 }

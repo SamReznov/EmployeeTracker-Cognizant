@@ -70,6 +70,10 @@ class EmployeeService{
     async getEmployeeByPage(pageNo:number,projectId:number){
         return await axios.get(`http://localhost:8080/api/project/${projectId}/employee?pageNo=${pageNo}`);
     }
+
+    async searchEmployeeByTheirName(pageNo:number,name:string){
+        return await axios.get(`http://localhost:8080/api/employeeSearch/${name}?pageNo=${pageNo}`)
+    }
    
 
 }

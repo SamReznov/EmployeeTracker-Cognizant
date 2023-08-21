@@ -62,7 +62,7 @@ function EmployeeList() {
       
       
 
-      const onClickHandler = (e:any)=>{
+      const onDropdownMenuSelectHandler = (e:any)=>{
         e.preventDefault();
 
         console.log(e.target.getAttribute("projectId"));
@@ -93,7 +93,7 @@ function EmployeeList() {
                 {selectedProjectName}
               </Dropdown.Toggle>
 
-              <Dropdown.Menu onClick={onClickHandler}>
+              <Dropdown.Menu onClick={onDropdownMenuSelectHandler}>
               <Dropdown.Item projectId={0} value="All Project">All Project</Dropdown.Item>
                 {
                   projects.map((project:projectInterface)=>{

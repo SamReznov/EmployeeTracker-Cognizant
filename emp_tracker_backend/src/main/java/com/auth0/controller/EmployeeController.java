@@ -134,6 +134,16 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employeePage);
     }
 
+    @GetMapping("/employeeSearch/{employeeName}")
+    ResponseEntity<?> searchEmployeeByName(@PathVariable(value = "employeeName") String name,@RequestParam(value = "pageNo",defaultValue = "1") int pageNo){
+        Page<Employee> employeePage;
+        try{
+            employeePage=employeeService.searchEmployeeByTheirName(name,pageNo);
+        }catch(EmployeeNotFoundException e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok().body(employeePage);
+    }
 
 
 }

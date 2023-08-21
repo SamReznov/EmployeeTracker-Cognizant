@@ -144,7 +144,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    public Page<Employee> searchEmployeeByTheirName(String name ,int pageNo){
+        if(name == ""){
+            throw new EmployeeNotFoundException("We apologize, but name provided is an empty string" );
+        }
+        else{
+            Pageable pageable = PageRequest.of(pageNo -1,5);
+            Page<Employee> employeePage = employeeDao.findByEmpFirstNameContaining(name,pageable);
+            if(employeePage.getContent().size()>0){
+                return employeePage;
+            }else{
+                throw new EmployeeNotFoundException("We apologize, but we couldn't locate any employee associated with this name. Please verify the employee details" );
+            }
+        }
 
+    }
 
 
 
