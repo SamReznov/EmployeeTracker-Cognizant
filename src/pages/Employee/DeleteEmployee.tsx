@@ -3,6 +3,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import "./DeleteEmployee.scss";
 
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Button } from "react-bootstrap";
 
@@ -21,36 +22,15 @@ const DeleteEmployee = () => {
   const navigate = useNavigate();
   const [id, setId] = useState<string>();
   const [formError, setFormError] = useState<string>();
-
-  // const [page ,setPage] = useState<number>(1);
-  // const [noOfPages,setNoOfPages] = useState<number|any>(0);
-  // const [employeePage, setEmployeePage] = useState<employeePageInterface>();
-
+ 
   useEffect(() => {
     EmployeeService.getEmployee().then((res) => {
       setItem(res.data);
     });
-  }, [item]);
+  },[]);
   
 
-  // useEffect(() => {
-  //   EmployeeService.getEmployeeByPage(page)
 
-  //     .then((res) => {
-        
-  //       setNoOfPages(employeePage?.totalPages)
-  //       setEmployeePage(res.data);
-  //       console.log(res.data)
-    
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //     }, [page,noOfPages]);
-
-
-
-  //handling local storage
 
   const deleteItems = () => {
     setFormError(validate());
@@ -75,6 +55,7 @@ const DeleteEmployee = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
+          onClose:() => navigate('/')
         });
       } else {
         toast.info(`Employee with id : ${id} is not present`, {

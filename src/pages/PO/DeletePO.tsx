@@ -21,7 +21,7 @@ const DeletePO = () => {
       POService.getPO().then((res) => {
          setItem(res.data);
      });
-    }, [item]);
+    }, []);
 
     // useEffect(()=>{
     //   console.log("---Use Effect called---")
