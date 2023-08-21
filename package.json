@@ -31,7 +31,8 @@
     "redux-persist": "^6.0.0",
     "sass": "^1.63.5",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "pdfjs-dist": "*"
   },
   "scripts": {
     "start": "react-scripts start",

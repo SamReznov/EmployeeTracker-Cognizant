@@ -6,10 +6,19 @@
 
 .displayFlex {
     display: flex;
-    flex-direction: column;
-    justify-content: center;;
+    flex-direction: row-reverse;
+    justify-content: space-between;;
     align-items: center;
     .dropdown {
         width: 50%;
     }
+}
+#filterLabel{
+    padding-right: 40px;
+    text-align: center;
+}
+.dropdownItems{
+    display: flex;
+    flex-direction: column;
+    
 }

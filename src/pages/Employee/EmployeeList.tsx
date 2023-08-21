@@ -12,6 +12,7 @@ import {employeePageInterface,employeeInterface,projectInterface} from '../../da
 import { Dropdown } from "react-bootstrap";
 import ProjectService from "../../servises/ProjectService";
 import { useSelector } from "react-redux";
+import { wrap } from "module";
 
 
 
@@ -71,6 +72,11 @@ function EmployeeList() {
         setSelectedProjectName(e.target.getAttribute("value"));
         
       }
+
+    
+    const onSearchHandler = (e:any)=>{
+      console.log("onSearch called from child component")
+    }
   
 
  
@@ -79,23 +85,32 @@ function EmployeeList() {
 
       <div>
         <div className="displayFlex">
-          <span>Employee filter per project</span>
-          <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic" >
-            {selectedProjectName}
-          </Dropdown.Toggle>
+          <div className="dropdownItems">
+              <span id="filterLabel">Filter By Project</span>
+              <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic" style={{width:'fit-content'}}>
+                {selectedProjectName}
+              </Dropdown.Toggle>
 
-          <Dropdown.Menu onClick={onClickHandler}>
-          <Dropdown.Item projectId={0} value="All Project">All Project</Dropdown.Item>
-            {
-              projects.map((project:projectInterface)=>{
-                  return <Dropdown.Item projectId={project.projectId} value={project.projectName}>{project.projectName}</Dropdown.Item>
-              })
-            }
+              <Dropdown.Menu onClick={onClickHandler}>
+              <Dropdown.Item projectId={0} value="All Project">All Project</Dropdown.Item>
+                {
+                  projects.map((project:projectInterface)=>{
+                      return <Dropdown.Item projectId={project.projectId} value={project.projectName}>{project.projectName}</Dropdown.Item>
+                  })
+                }
 
-          </Dropdown.Menu>
-    </Dropdown>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+          
+          <div>
+            <SearchBar onSearchHandler={onSearchHandler}/>
+          </div>
+
        </div>
+
+     
       
       <div className="table-container" role="table" aria-label="Destinations">
         <div className="flex-table header" role="rowgroup">
