@@ -76,6 +76,7 @@ function EmployeeList() {
     
     const onSearchHandler = (e:any)=>{
       console.log("onSearch called from child component")
+      console.log(e)
     }
   
 
