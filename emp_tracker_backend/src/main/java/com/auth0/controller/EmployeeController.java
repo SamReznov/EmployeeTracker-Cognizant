@@ -146,4 +146,18 @@ public class EmployeeController {
     }
 
 
+    @GetMapping("/project/{projectId}/emp")
+    ResponseEntity<?> getEmployeeByProjectAndName(@PathVariable long projectId,
+                                           @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+                                           @RequestParam(value="name", defaultValue = " ") String name
+    ){
+        Page<Employee> employeePage;
+        try{
+            employeePage=employeeService.findAllEmployeeByProjectAndName(projectId,name,pageNo);
+        }catch(EmployeeNotFoundException e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok().body(employeePage);
+    }
+
 }

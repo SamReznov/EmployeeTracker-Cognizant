@@ -28,6 +28,8 @@ public interface EmployeeService{
 
     Page<Employee> searchEmployeeByTheirName(String name,int pageNo);
 
+    Page<Employee> findAllEmployeeByProjectAndName(long projectId,String name,int pageNo);
+
 
 
 

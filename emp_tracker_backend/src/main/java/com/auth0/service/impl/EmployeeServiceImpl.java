@@ -160,6 +160,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+    @Override
+    public Page<Employee> findAllEmployeeByProjectAndName(long projectId, String name, int pageNo) {
+        if(projectId==0){
+            Pageable pageable = PageRequest.of(pageNo - 1, 5);
+            Page<Employee> employeePage=employeeDao.findByEmpFirstNameContaining(name,pageable);
+            return employeePage;
+        }
+        Optional<Project> project=projectDao.findById(projectId);
+        if(project.isPresent()) {
+            Pageable pageable = PageRequest.of(pageNo - 1, 5);
+            Page<Employee> employeePage=employeeDao.findByProjectAndEmpFirstNameContaining(project.get(),name,pageable);
+            if(employeePage.getContent().size()>0){
+                return employeePage;
+            }else{
+                throw new EmployeeNotFoundException("We apologize, but we couldn't locate any employee associated with this project. Please verify the project details" );
+            }
+
+        }else{
+            throw new EmployeeNotFoundException("Oops! We couldn't find any records matching the provided project ID:"+projectId+"\nPlease double-check the ID and try again.");
+        }
+
+    }
 
 
 //    @Override
