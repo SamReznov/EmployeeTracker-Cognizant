@@ -21,6 +21,7 @@ import { wrap } from "module";
 function EmployeeList() {
  
   const [page ,setPage] = useState<number|any>(1);
+  const [name,setName] = useState<string|any>("");
   const [noOfPages,setNoOfPages] = useState<number|any>(1);
   const [employeePage, setEmployeePage] = useState<employeePageInterface>();
   const [projects,setProjects] = useState<projectInterface[]>([]);
@@ -43,7 +44,7 @@ function EmployeeList() {
     
 
     useEffect(() => {
-      EmployeeService.getEmployeeByPage(page,selectedProjectId)
+      EmployeeService.getEmployeeByProjectAndNamePage(page,selectedProjectId,name)
   
         .then((res) => {
           console.log(res.data)
@@ -57,7 +58,7 @@ function EmployeeList() {
         .catch((err) => {
           console.log(err);
         });
-        }, [page,noOfPages,selectedProjectId]);
+        }, [page,noOfPages,selectedProjectId,name]);
         
       
       
@@ -75,8 +76,9 @@ function EmployeeList() {
 
     
     const onSearchHandler = (e:any)=>{
-      console.log("onSearch called from child component")
-      console.log(e)
+      setNoOfPages(1);
+      setPage(1);
+      setName(e);
     }
   
 

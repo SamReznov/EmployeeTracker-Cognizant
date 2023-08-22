@@ -121,35 +121,24 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employeePage);
     }
 
-    @GetMapping("/project/{projectId}/employee")
-    ResponseEntity<?> getEmployeeByProject(@PathVariable long projectId,
-    @RequestParam(value="pageNo", defaultValue = "1") int pageNo
-    ){
-        Page<Employee> employeePage;
-        try{
-            employeePage=employeeService.findAllEmployeeByProject(projectId,pageNo);
-        }catch(EmployeeNotFoundException e){
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-        return ResponseEntity.ok().body(employeePage);
-    }
 
-    @GetMapping("/employeeSearch/{employeeName}")
-    ResponseEntity<?> searchEmployeeByName(@PathVariable(value = "employeeName") String name,@RequestParam(value = "pageNo",defaultValue = "1") int pageNo){
-        Page<Employee> employeePage;
-        try{
-            employeePage=employeeService.searchEmployeeByTheirName(name,pageNo);
-        }catch(EmployeeNotFoundException e){
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-        return ResponseEntity.ok().body(employeePage);
-    }
+
+//    @GetMapping("/employeeSearch/{employeeName}")
+//    ResponseEntity<?> searchEmployeeByName(@PathVariable(value = "employeeName") String name,@RequestParam(value = "pageNo",defaultValue = "1") int pageNo){
+//        Page<Employee> employeePage;
+//        try{
+//            employeePage=employeeService.searchEmployeeByTheirName(name,pageNo);
+//        }catch(EmployeeNotFoundException e){
+//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+//        }
+//        return ResponseEntity.ok().body(employeePage);
+//    }
 
 
     @GetMapping("/project/{projectId}/emp")
     ResponseEntity<?> getEmployeeByProjectAndName(@PathVariable long projectId,
                                            @RequestParam(value="pageNo", defaultValue = "1") int pageNo,
-                                           @RequestParam(value="name", defaultValue = " ") String name
+                                           @RequestParam(value="name", defaultValue = "") String name
     ){
         Page<Employee> employeePage;
         try{

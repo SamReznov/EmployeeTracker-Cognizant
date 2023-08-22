@@ -67,13 +67,14 @@ class EmployeeService{
         return await axios.get(`${EMPLOYEE_API_BASE_URL}/total`)
     }
 
-    async getEmployeeByPage(pageNo:number,projectId:number){
-        return await axios.get(`http://localhost:8080/api/project/${projectId}/employee?pageNo=${pageNo}`);
+     getEmployeeByProjectAndNamePage(pageNo:number,projectId:number,name:string){
+        console.log("---"+name+"----"+projectId +"---")
+        return  axios.get(`http://localhost:8080/api/project/${projectId}/emp?pageNo=${pageNo}&name=${name}`);
     }
 
-    async searchEmployeeByTheirName(pageNo:number,name:string){
-        return await axios.get(`http://localhost:8080/api/employeeSearch/${name}?pageNo=${pageNo}`)
-    }
+    // async searchEmployeeByTheirName(pageNo:number,name:string){
+    //     return await axios.get(`http://localhost:8080/api/employeeSearch/${name}?pageNo=${pageNo}`)
+    // }
    
 
 }

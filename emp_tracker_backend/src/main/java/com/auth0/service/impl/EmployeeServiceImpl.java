@@ -123,26 +123,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeePage;
     }
 
-    @Override
-    public Page<Employee> findAllEmployeeByProject(long projectId,int pageNo) {
-        if(projectId==0){
-            Page<Employee> employeePage=findAllByPage(pageNo);
-            return employeePage;
-        }
-        Optional<Project> project=projectDao.findById(projectId);
-        if(project.isPresent()) {
-            Pageable pageable = PageRequest.of(pageNo - 1, 5);
-            Page<Employee> employeePage=employeeDao.findByProject(project.get(), pageable);
-            if(employeePage.getContent().size()>0){
-                return employeePage;
-            }else{
-                throw new EmployeeNotFoundException("We apologize, but we couldn't locate any employee associated with this project. Please verify the project details" );
-            }
 
-        }else{
-            throw new EmployeeNotFoundException("Oops! We couldn't find any records matching the provided project ID:"+projectId+"\nPlease double-check the ID and try again.");
-        }
-    }
 
     public Page<Employee> searchEmployeeByTheirName(String name ,int pageNo){
         if(name == ""){
@@ -162,24 +143,39 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Page<Employee> findAllEmployeeByProjectAndName(long projectId, String name, int pageNo) {
-        if(projectId==0){
+        if(projectId == 0 && name != ""){
             Pageable pageable = PageRequest.of(pageNo - 1, 5);
             Page<Employee> employeePage=employeeDao.findByEmpFirstNameContaining(name,pageable);
             return employeePage;
         }
-        Optional<Project> project=projectDao.findById(projectId);
-        if(project.isPresent()) {
-            Pageable pageable = PageRequest.of(pageNo - 1, 5);
-            Page<Employee> employeePage=employeeDao.findByProjectAndEmpFirstNameContaining(project.get(),name,pageable);
-            if(employeePage.getContent().size()>0){
-                return employeePage;
-            }else{
-                throw new EmployeeNotFoundException("We apologize, but we couldn't locate any employee associated with this project. Please verify the project details" );
-            }
-
-        }else{
-            throw new EmployeeNotFoundException("Oops! We couldn't find any records matching the provided project ID:"+projectId+"\nPlease double-check the ID and try again.");
+        else if(projectId == 0 && name == ""){
+            return findAllByPage(pageNo);
         }
+
+        else if (projectId != 0 && name == "") {
+            Pageable pageable = PageRequest.of(pageNo - 1, 5);
+            Optional<Project> project=projectDao.findById(projectId);
+            Page<Employee> employeePage = employeeDao.findByProject(project.get(),pageable);
+            return employeePage;
+        }
+        else{
+            Optional<Project> project=projectDao.findById(projectId);
+            if(project.isPresent()) {
+                Pageable pageable = PageRequest.of(pageNo - 1, 5);
+                Page<Employee> employeePage=employeeDao.findByProjectAndEmpFirstNameContaining(project.get(),name,pageable);
+                if(employeePage.getContent().size()>0){
+                    return employeePage;
+                }else{
+                    throw new EmployeeNotFoundException("We apologize, but we couldn't locate any employee associated with this project. Please verify the project details" );
+                }
+            }
+            else{
+                throw new EmployeeNotFoundException("Oops! We couldn't find any records matching the provided project ID:"+projectId+"\nPlease double-check the ID and try again.");
+            }
+        }
+
+
+
 
     }
 

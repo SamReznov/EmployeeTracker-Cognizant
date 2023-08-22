@@ -24,7 +24,6 @@ public interface EmployeeService{
 
     Page<Employee> findAllByPage(int pageNo);
 
-    Page<Employee> findAllEmployeeByProject(long projectId,int pageNo);
 
     Page<Employee> searchEmployeeByTheirName(String name,int pageNo);
 
