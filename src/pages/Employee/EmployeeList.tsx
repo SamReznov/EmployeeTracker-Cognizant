@@ -27,7 +27,7 @@ function EmployeeList() {
   const [projects,setProjects] = useState<projectInterface[]>([]);
   const [selectedProjectName,setSelectedProjectName] = useState<string>("Select Project");
   const [selectedProjectId,setSelectedProjectId] = useState<number|any>(0);
-  
+  const [errorMessage,setErrorMessage ] = useState("");
 
   const user  = useSelector((state:any)=>state.user.currentUser)
 
@@ -53,10 +53,11 @@ function EmployeeList() {
          
           console.log("no of pages " +res.data.totalPages )
           console.log("no of employee " + res.data.totalElements)
-          
+          setErrorMessage("");
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data)
+          setErrorMessage(err.response.data)
         });
         }, [page,noOfPages,selectedProjectId,name]);
         
@@ -115,7 +116,8 @@ function EmployeeList() {
 
      
       
-      <div className="table-container" role="table" aria-label="Destinations">
+
+      {errorMessage ===""?<div className="table-container" role="table" aria-label="Destinations">
         <div className="flex-table header" role="rowgroup">
           <div className="flex-row first" role="columnheader">
             Emp Id{}
@@ -142,7 +144,7 @@ function EmployeeList() {
           </div>
         </div>
         
-
+      
         {employeePage?.content.map((item: employeeInterface, index: any) => {
           return (
             <div>
@@ -153,9 +155,7 @@ function EmployeeList() {
             </div>
           );
         })}
-       
-      </div>
-      <Pagination className="pagination"
+       <Pagination className="pagination"
         count={noOfPages}
         size="large"
         color="secondary"
@@ -164,6 +164,8 @@ function EmployeeList() {
         defaultPage={1}
         onChange={(event,value)=>{setPage(value)}}
       />
+      </div>:<div className="errorMessage">{errorMessage}</div>}
+      
       
     </div>
 

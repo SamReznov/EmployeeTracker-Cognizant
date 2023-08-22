@@ -143,7 +143,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Page<Employee> findAllEmployeeByProjectAndName(long projectId, String name, int pageNo) {
-        if(projectId == 0 && name != ""){
+        if(projectId == 0 && !name.equals("")){
             Pageable pageable = PageRequest.of(pageNo - 1, 5);
             Page<Employee> employeePage=employeeDao.findByEmpFirstNameContaining(name,pageable);
             if(employeePage.getContent().size()>0){
@@ -154,7 +154,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
 
         }
-        else if(projectId == 0 && name == ""){
+        else if(projectId == 0 && name.equals("")){
 
             Page<Employee> employeePage=findAllByPage(pageNo);
             if(employeePage.getContent().size()>0){
@@ -164,7 +164,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
         }
 
-        else if (projectId != 0 && name == "") {
+        else if(projectId != 0 && name.equals("")) {
             Pageable pageable = PageRequest.of(pageNo - 1, 5);
             Optional<Project> project=projectDao.findById(projectId);
             Page<Employee> employeePage = employeeDao.findByProject(project.get(),pageable);
@@ -184,7 +184,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 if(employeePage.getContent().size()>0){
                     return employeePage;
                 }else{
-                    throw new EmployeeNotFoundException("We apologize, but there are no records of an employee named "+name+" associated with the project "+project+". Please double-check the details");
+                    throw new EmployeeNotFoundException("We apologize, but there are no records of an employee named "+name+" associated with the project "+project.get().getProjectName()+". Please double-check the details");
                 }
             }
             else{

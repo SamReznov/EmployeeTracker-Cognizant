@@ -10,6 +10,7 @@ const SearchBar = ({onSearchHandler}:any) => {
   }
   const onChangeHandler = (e:any)=>{
     setData(e.target.value)
+    onSearchHandler(e.target.value)
     console.log(e.target.value)
   }
   return (
