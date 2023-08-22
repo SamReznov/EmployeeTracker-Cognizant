@@ -146,17 +146,35 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(projectId == 0 && name != ""){
             Pageable pageable = PageRequest.of(pageNo - 1, 5);
             Page<Employee> employeePage=employeeDao.findByEmpFirstNameContaining(name,pageable);
-            return employeePage;
+            if(employeePage.getContent().size()>0){
+                return employeePage;
+            }
+            else{
+                throw new EmployeeNotFoundException("Apologies, but there are no records of an employee named "+name+" in our system. Please verify the name");
+            }
+
         }
         else if(projectId == 0 && name == ""){
-            return findAllByPage(pageNo);
+
+            Page<Employee> employeePage=findAllByPage(pageNo);
+            if(employeePage.getContent().size()>0){
+                return employeePage;
+            }else{
+                throw new EmployeeNotFoundException("Currently, there are no employees to display. The list is empty at the moment.");
+            }
         }
 
         else if (projectId != 0 && name == "") {
             Pageable pageable = PageRequest.of(pageNo - 1, 5);
             Optional<Project> project=projectDao.findById(projectId);
             Page<Employee> employeePage = employeeDao.findByProject(project.get(),pageable);
-            return employeePage;
+            if(employeePage.getContent().size()>0){
+                return employeePage;
+            }
+            else{
+                throw new EmployeeNotFoundException("At the moment, there are no employees associated with this project. The list is currently empty.");
+            }
+
         }
         else{
             Optional<Project> project=projectDao.findById(projectId);
@@ -166,7 +184,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 if(employeePage.getContent().size()>0){
                     return employeePage;
                 }else{
-                    throw new EmployeeNotFoundException("We apologize, but we couldn't locate any employee associated with this project. Please verify the project details" );
+                    throw new EmployeeNotFoundException("We apologize, but there are no records of an employee named "+name+" associated with the project "+project+". Please double-check the details");
                 }
             }
             else{
