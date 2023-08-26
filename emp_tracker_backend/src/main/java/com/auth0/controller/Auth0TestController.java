@@ -1,5 +1,7 @@
 package com.auth0.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +16,10 @@ import com.auth0.dto.ResponseDTO;
 @CrossOrigin("*")
 @RequestMapping("/auth0")
 public class Auth0TestController {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(Auth0TestController.class);
     @GetMapping("/hello")
     public String getHello(){
+        LOGGER.info("Hello is Called");
         return "Hello";
     }
 
