@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="trace">
     <Appenders>
+<!--        <Console name="Console" target="SYSTEM_OUT">-->
+<!--            <PatternLayout pattern="%d{yyyy-MMM-dd hh:mm:ss a} %level %c - %m %n" />-->
+<!--        </Console>-->
+<!--        <JDBC name="dbLogsStore" tableName="employee_tracker_db_2.EVENT_LOGS">-->
+<!--            <ConnectionFactory class="com.auth0.config.ConnectionFactory" method="getDatabaseConnection" />-->
+<!--            <Column name="ID" pattern="%u" />-->
+<!--            <Column name="DATE_TIME" isEventTimestamp="true" />-->
+<!--            <Column name="CLASS_INFO" pattern="%logger" />-->
+<!--            <Column name="LEVEL" pattern="%level" />-->
+<!--            <Column name="MESSAGE" pattern="%message"  />-->
+<!--            <Column name="EXCEPTION_INFO" pattern="%ex{full}" isClob="true" />-->
+<!--        </JDBC>-->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MMM-dd hh:mm:ss a} %level %c - %m %n" />
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
-        <JDBC name="dbLogsStore" tableName="employee_tracker_db_2.EVENT_LOGS">
-            <ConnectionFactory class="com.auth0.config.ConnectionFactory" method="getDatabaseConnection" />
-            <Column name="ID" pattern="%u" />
-            <Column name="DATE_TIME" isEventTimestamp="true" />
-            <Column name="CLASS_INFO" pattern="%logger" />
-            <Column name="LEVEL" pattern="%level" />
-            <Column name="MESSAGE" pattern="%message"  />
-            <Column name="EXCEPTION_INFO" pattern="%ex{full}" isClob="true" />
-        </JDBC>
+        <File name="MyFile" fileName="all.log" immediateFlush="true" append="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
     </Appenders>
     <Loggers>
         <Logger name="com.auth0" level="info">
             <AppenderRef ref="Console" />
-            <AppenderRef ref="dbLogsStore" />
+           <AppenderRef ref="MyFile" />
         </Logger>
-        <Root level="off">
-            <!--            <AppenderRef ref="dbLogsStore" />-->
+        <Root level="info">
+
         </Root>
     </Loggers>
 </Configuration>
