@@ -262,7 +262,7 @@ function UpdateEmployee() {
               employee.teamName &&
               employee.projectSiteLocation
             ){
-                EmployeeService.updateEmployee(employee)
+                EmployeeService.updateEmployee(employee,userDetails.token)
                 .then(response => {
                     console.log(response)
                     toast.success("Employee updated successfully!", {

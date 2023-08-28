@@ -16,12 +16,15 @@ import { Pagination } from "@mui/material";
 import EmployeeList from "./EmployeeList";
 import AppHeader from "../../containers/header/AppHeader";
 import AppFooter from "../../containers/footer/AppFooter";
+import { useSelector } from "react-redux";
 
 const DeleteEmployee = () => {
   const [item, setItem] = useState<any[]>([]);
   const navigate = useNavigate();
   const [id, setId] = useState<string>();
   const [formError, setFormError] = useState<string>();
+
+  const userDetails  = useSelector((state:any)=>state.user.currentUser)
  
   useEffect(() => {
     EmployeeService.getEmployee().then((res) => {
@@ -45,7 +48,7 @@ const DeleteEmployee = () => {
       console.log("Found Items" + foundItem);
 
       if (foundItem) {
-        EmployeeService.deleteEmployee(Number(id));
+        EmployeeService.deleteEmployee(Number(id),userDetails.token);
         item.filter((employee) => employee.ctsEmpId !== id);
         toast.success(`Employee deleted successfully with id : ${id}`, {
           position: toast.POSITION.TOP_CENTER,

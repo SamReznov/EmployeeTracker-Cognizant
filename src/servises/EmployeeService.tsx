@@ -50,17 +50,31 @@ class EmployeeService{
 
 
 
-   async updateEmployee(employee:any){
-        return await axios.put(EMPLOYEE_API_BASE_URL,employee);
+   async updateEmployee(employee:any,token:any){
+        return await axios.put(EMPLOYEE_API_BASE_URL,employee,{
+            headers:
+                {
+                   
+                    'Authorization':'Bearer'+token
+                   
+                }
+            });
     }
 
 
 
 
-    deleteEmployee(id:number){
+    deleteEmployee(id:number,token:any){
         console.log("----"+id);
         console.log(`${EMPLOYEE_API_BASE_URL}/${id}`);
-        axios.delete(`${EMPLOYEE_API_BASE_URL}/${id}`);
+        axios.delete(`${EMPLOYEE_API_BASE_URL}/${id}`,{
+            headers:
+                {
+                   
+                    'Authorization':'Bearer'+token
+                   
+                }
+            });
     }
 
     async getTotalNoOfEmployee(){
