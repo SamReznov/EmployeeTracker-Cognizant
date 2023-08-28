@@ -1,6 +1,0 @@
-2023-08-27 11:07:58.794 [main] INFO  com.auth0.DemoApplication - Starting DemoApplication using Java 17.0.6 with PID 2816 (C:\Users\Samar\Desktop\EmployeeTracker Cognizant\EmployeeTracker-Cognizant\emp_tracker_backend\target\classes started by Samar in C:\Users\Samar\Desktop\EmployeeTracker Cognizant\EmployeeTracker-Cognizant\emp_tracker_backend)
-2023-08-27 11:07:58.804 [main] INFO  com.auth0.DemoApplication - No active profile set, falling back to 1 default profile: "default"
-2023-08-27 11:08:03.338 [main] INFO  com.auth0.DemoApplication - Started DemoApplication in 4.918 seconds (process running for 5.624)
-2023-08-27 11:09:06.348 [http-nio-8080-exec-1] INFO  com.auth0.controller.Auth0TestController - public req called
-2023-08-27 11:09:22.232 [http-nio-8080-exec-2] INFO  com.auth0.controller.Auth0TestController - public req called
-2023-08-27 11:09:22.888 [http-nio-8080-exec-4] INFO  com.auth0.controller.Auth0TestController - public req called

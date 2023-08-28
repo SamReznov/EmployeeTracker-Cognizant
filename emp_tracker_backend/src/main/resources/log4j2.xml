@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="trace">
+<Configuration level="error" name ="com.auth0" >
     <Appenders>
-<!--        <Console name="Console" target="SYSTEM_OUT">-->
-<!--            <PatternLayout pattern="%d{yyyy-MMM-dd hh:mm:ss a} %level %c - %m %n" />-->
-<!--        </Console>-->
-<!--        <JDBC name="dbLogsStore" tableName="employee_tracker_db_2.EVENT_LOGS">-->
-<!--            <ConnectionFactory class="com.auth0.config.ConnectionFactory" method="getDatabaseConnection" />-->
-<!--            <Column name="ID" pattern="%u" />-->
-<!--            <Column name="DATE_TIME" isEventTimestamp="true" />-->
-<!--            <Column name="CLASS_INFO" pattern="%logger" />-->
-<!--            <Column name="LEVEL" pattern="%level" />-->
-<!--            <Column name="MESSAGE" pattern="%message"  />-->
-<!--            <Column name="EXCEPTION_INFO" pattern="%ex{full}" isClob="true" />-->
-<!--        </JDBC>-->
+        <JDBC name="dbLogsStore" tableName="EVENT_LOGS">
+
+            <!-- If Using then JNDI DateSource -->
+            <!-- <DataSource jndiName="java:/comp/env/jdbc/LoggingDataSource" /> -->
+
+            <ConnectionFactory
+                    class="com.auth0.config.LogsStoreConnectionFactory"
+                    method="getConnection" />
+            <Column name="ID" pattern="%u" />
+            <Column name="DATE_TIME" isEventTimestamp="true" />
+            <Column name="CLASS" pattern="%logger" />
+            <Column name="LEVEL" pattern="%level" />
+            <Column name="MESSAGE" pattern="%message" />
+            <Column name="EXCEPTION" pattern="%ex{full}" isClob="true"/>
+        </JDBC>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
@@ -21,12 +24,16 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.auth0" level="info">
-            <AppenderRef ref="Console" />
-           <AppenderRef ref="MyFile" />
+        <Logger name="com.auth0.controller" level="info">
+                <AppenderRef ref="dbLogsStore"/>
         </Logger>
-        <Root level="info">
+        <Logger name ="com.auth0" level ="info">
+            <AppenderRef ref="MyFile"/>
+        </Logger>
 
+        <Root level="info">
+<!--            <AppenderRef ref="Console" />-->
+            <AppenderRef ref="Console" />
         </Root>
     </Loggers>
 </Configuration>
