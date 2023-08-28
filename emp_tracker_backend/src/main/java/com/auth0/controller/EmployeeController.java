@@ -66,11 +66,11 @@ public class EmployeeController {
     }
 
     @PutMapping("/employee")
-    ResponseEntity<?> updateEmployee(@RequestBody Employee employee){
+    ResponseEntity<?> updateEmployee(@RequestBody Employee employee,Principal principal){
         System.out.println(employee);
         Employee updatedEmployee;
         try {
-            updatedEmployee= employeeService.updateEmployee(employee);
+            updatedEmployee= employeeService.updateEmployee(employee,principal.getName());
         }
         catch(EmployeeNotFoundException e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -79,10 +79,10 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employee/{empId}")
-    ResponseEntity<String> deleteEmployee(@PathVariable long empId){
+    ResponseEntity<String> deleteEmployee(@PathVariable long empId,Principal principal){
         String message="";
         try {
-            message = employeeService.deleteEmployee(empId);
+            message = employeeService.deleteEmployee(empId,principal.getName());
         }
         catch(EmployeeNotFoundException e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);

@@ -4,6 +4,7 @@ import com.auth0.model.Employee;
 import com.auth0.model.EmployeeResponse;
 import org.springframework.data.domain.Page;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface EmployeeService{
@@ -14,9 +15,9 @@ public interface EmployeeService{
 
     Employee getEmployeeById(long empId);
 
-    Employee updateEmployee(Employee employee);
+    Employee updateEmployee(Employee employee,String name);
 
-    String deleteEmployee(long empId);
+    String deleteEmployee(long empId,String name);
 
 //    Employee addRoleToEmployee(Employee employee);
 

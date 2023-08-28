@@ -24,7 +24,7 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.auth0.controller" level="info">
+        <Logger name="com.auth0.service.impl" level="info">
                 <AppenderRef ref="dbLogsStore"/>
         </Logger>
         <Logger name ="com.auth0" level ="info">

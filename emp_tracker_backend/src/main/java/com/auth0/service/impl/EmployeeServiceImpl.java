@@ -1,5 +1,6 @@
 package com.auth0.service.impl;
 
+import com.auth0.controller.Auth0TestController;
 import com.auth0.dao.EmployeeDao;
 import com.auth0.dao.ProjectDao;
 import com.auth0.exception.EmployeeNotFoundException;
@@ -7,17 +8,22 @@ import com.auth0.model.Employee;
 import com.auth0.model.Project;
 import com.auth0.service.EmployeeService;
 import com.auth0.service.ProjectService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.*;
 
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+
+    private static final Logger LOGGER = LogManager.getLogger(EmployeeServiceImpl.class);
 
     @Autowired
     private EmployeeDao employeeDao;
@@ -73,7 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee updateEmployee(Employee employee) {
+    public Employee updateEmployee(Employee employee,String name) {
         Optional<Employee> existingEmployee=employeeDao.findById(employee.getCtsEmpId());
         if(existingEmployee.isPresent()){
 
@@ -92,6 +98,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                     employeeDao.save(existEmp);
                     throw new EmployeeNotFoundException("Congratulations! The employee has been successfully updated to the database. However, we couldn't find the project in our records. Please ensure the project details are accurate.");
                 }
+                Map<String,String> map=compareTwoEmployeeObject(employee,existingEmployee.get());
+                LOGGER.info("Employee details for ID "+ employee.getCtsEmpId()+" have been successfully updated by "+name+":\n "+map);
                 return employeeDao.save(existEmp);
             }
         }else{
@@ -100,11 +108,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public String deleteEmployee(long empId) {
+    public String deleteEmployee(long empId,String name) {
         Optional<Employee> existingEmployee=employeeDao.findById(empId);
         if(existingEmployee.isPresent()) {
             Employee existEmp = existingEmployee.get();
             employeeDao.delete(existEmp);
+            LOGGER.info("Employee with ID "+empId+" has been successfully deleted from our records, with the deletion authorized by "+name);
             return "Success! The employee with ID: "+empId+" has been successfully deleted from our records.";
         }else{
             throw new EmployeeNotFoundException("Oops! We couldn't find any records matching the provided employee ID:"+empId+"\nPlease double-check the ID and try again.");
@@ -126,8 +135,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     public Page<Employee> searchEmployeeByTheirName(String name ,int pageNo){
-        if(name == ""){
-            throw new EmployeeNotFoundException("We apologize, but name provided is an empty string" );
+        if(name== ""){
+            throw new EmployeeNotFoundException("We apologize, but  provided is an empty string" );
         }
         else{
             Pageable pageable = PageRequest.of(pageNo -1,5);
@@ -135,7 +144,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             if(employeePage.getContent().size()>0){
                 return employeePage;
             }else{
-                throw new EmployeeNotFoundException("We apologize, but we couldn't locate any employee associated with this name. Please verify the employee details" );
+                throw new EmployeeNotFoundException("We apologize, but we couldn't locate any employee associated with this . Please verify the employee details" );
             }
         }
 
@@ -150,7 +159,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 return employeePage;
             }
             else{
-                throw new EmployeeNotFoundException("Apologies, but there are no records of an employee named "+name+" in our system. Please verify the name");
+                throw new EmployeeNotFoundException("Apologies, but there are no records of an employee named "+name+" in our system. Please verify the ");
             }
 
         }
@@ -193,8 +202,55 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
 
+    }
 
+    public static Map<String,String> compareTwoEmployeeObject(Employee employee1,Employee employee2){
+        Map<String,String> map=new HashMap<>();
 
+        if(!employee1.getEmpFirstName().equals(employee2.getEmpFirstName())){
+            map.put("First Name",employee1.getEmpFirstName());
+        }
+        if(!employee1.getEmpLastName().equals(employee2.getEmpLastName())){
+            map.put("Last Name",employee1.getEmpLastName());
+        }
+        if(!employee1.getEmpEmail().equals(employee2.getEmpEmail())){
+            map.put("Email",employee1.getEmpEmail());
+        }
+        if(!employee1.getEmpPhone().equals(employee2.getEmpPhone())){
+            map.put("Phone",String.valueOf(employee1.getEmpPhone()));
+        }
+        if(!employee1.getEmpLocation().equals(employee2.getEmpLocation())){
+            map.put("Location",employee1.getEmpLocation());
+        }
+        if(!employee1.getEmpStartDate().equals(employee2.getEmpStartDate())){
+            map.put("Start Date",String.valueOf(employee1.getEmpStartDate()));
+        }
+        if(!employee1.getEmpEndDate().equals(employee2.getEmpEndDate())){
+            map.put("End Date",String.valueOf(employee1.getEmpEndDate()));
+        }
+        if(!employee1.getTeamName().equals(employee2.getTeamName())){
+            map.put("Team Name",employee1.getTeamName());
+        }
+        if(!employee1.getProject().getProjectName().equals(employee2.getProject().getProjectName())){
+            map.put("Project",employee1.getProject().getProjectName());
+        }
+        if(!employee1.getRole().getRoleName().equals(employee2.getRole().getRoleName())){
+            map.put("Role",employee1.getRole().getRoleName());
+        }
+        if(!employee1.getService().getServiceName().equals(employee2.getService().getServiceName())){
+            map.put("Service",employee1.getService().getServiceName());
+        }
+        if(!(employee1.getPo().getPoNumber()==(employee2.getPo().getPoNumber()))){
+            map.put("PO Number",String.valueOf(employee1.getPo().getPoNumber()));
+        }
+        if(!employee1.getEsaRateCard().equals(employee2.getEsaRateCard())){
+            map.put("ESA Rate",String.valueOf(employee1.getEsaRateCard()));
+        }
+        if(!employee1.getProjectSiteLocation().equals(employee2.getProjectSiteLocation())){
+            map.put("Project Site Location",employee1.getProjectSiteLocation());
+        }
+
+        return map;
     }
 
 
