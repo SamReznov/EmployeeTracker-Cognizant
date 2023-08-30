@@ -12,12 +12,14 @@ import com.auth0.service.ServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
+    private static Project project3;
     @Autowired
     private ProjectDao projectDao;
 
@@ -190,5 +192,22 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.save(newProject);
 
     }
+
+//    public static Map<String,String> compareTwoEmployeeObject(Project project1,Project project2){
+//        Field[] fields1=project1.getClass().getDeclaredFields();
+//        Field[] fields2=project2.getClass().getDeclaredFields();
+//        Map<String,String> map=new HashMap<>();
+//
+//        for (Field field : fields1) {
+//            for (Field field1 : fields2) {
+//                if(!(field.getName().contentEquals(field1.getName()))){
+//                    map.put(field1.getName(),project2.getClass().getName());
+//                    field1.
+//                }
+//            }
+//
+//        }
+//        return map;
+//    }
 }
 

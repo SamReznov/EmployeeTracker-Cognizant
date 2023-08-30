@@ -159,7 +159,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 return employeePage;
             }
             else{
-                throw new EmployeeNotFoundException("Apologies, but there are no records of an employee named "+name+" in our system. Please verify the ");
+                throw new EmployeeNotFoundException("Apologies, but there are no records of an employee named "+name+" in our system. Please verify the name.");
             }
 
         }
@@ -207,6 +207,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public static Map<String,String> compareTwoEmployeeObject(Employee employee1,Employee employee2){
         Map<String,String> map=new HashMap<>();
 
+
         if(!employee1.getEmpFirstName().equals(employee2.getEmpFirstName())){
             map.put("First Name",employee1.getEmpFirstName());
         }
@@ -243,8 +244,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(!(employee1.getPo().getPoNumber()==(employee2.getPo().getPoNumber()))){
             map.put("PO Number",String.valueOf(employee1.getPo().getPoNumber()));
         }
-        if(!employee1.getEsaRateCard().equals(employee2.getEsaRateCard())){
-            map.put("ESA Rate",String.valueOf(employee1.getEsaRateCard()));
+        if(!employee1.getEsaRateCard().getEsaAlphanumericValue().equals(employee2.getEsaRateCard().getEsaAlphanumericValue())){
+            map.put("ESA Rate",String.valueOf(employee1.getEsaRateCard().getEsaAlphanumericValue()));
         }
         if(!employee1.getProjectSiteLocation().equals(employee2.getProjectSiteLocation())){
             map.put("Project Site Location",employee1.getProjectSiteLocation());
