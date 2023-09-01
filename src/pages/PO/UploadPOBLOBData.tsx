@@ -130,15 +130,15 @@ const UploadPOBLOBData = () => {
                                     <input name='tax'value={input.tax} type='text' onChange={(e) => changeHandler(input.id, e)} />
                                 </div>
                                 {
-                                    lineItemFields.length > 1 && <button onClick={() => removeFields(input.id)}>-</button>
+                                    lineItemFields.length > 1 && <Button variant="danger"  onClick={() => removeFields(input.id)}>-</Button>
                                 }
 
-                                <button onClick={addFields}>+</button>
+                                <Button variant="primary" color='success' onClick={addFields}>+</Button>
                             </div>
 
                         ))
                     }
-                    <button className='btn-primary' onClick={submitHandler}>Submit</button>
+                    <Button className='btn-success' onClick={submitHandler}>Submit</Button>
 
                 </div>
                 </div>
