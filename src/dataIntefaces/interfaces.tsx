@@ -119,3 +119,11 @@
     empty: boolean
     }
 
+    export interface poBlobDataInterface{
+      poNumber:string,
+      revisionDate:string,
+      revisionNumber:string,
+      totalAmount:string,
+      poBlobFile:FormData,
+      arrayOfLineItems:any
+    }
