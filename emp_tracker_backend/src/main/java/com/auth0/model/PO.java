@@ -38,7 +38,7 @@ public class PO {
 
     @JsonIgnore
     @OneToMany(mappedBy = "po", cascade = CascadeType.ALL)
-    private List<POBlob> poBlobList=new ArrayList<>();
+    private List<PODATA> poDataList=new ArrayList<>();
 
 //   @JsonIgnore
     @ManyToOne

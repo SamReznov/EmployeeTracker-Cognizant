@@ -1,6 +1,5 @@
 package com.auth0.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,17 +12,19 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "po_blob")
-public class POBlob {
+@Table(name = "po_data")
+public class PODATA {
 
-    @EmbeddedId
-    private POBlobIdentity poBlobId;
+//    @EmbeddedId
+//    private POBlobIdentity poBlobId;
 
-    @Column(name = "po_blob",length = 45)
-    private String poBlob;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-//    @Column(name = "line_item")
-//    private double lineItem;
+
+    @Column(name = "line_item_number")
+   private double lineItemNumber;
 
     @Column(name = "line_item_desc")
     private String lineItemDesc;

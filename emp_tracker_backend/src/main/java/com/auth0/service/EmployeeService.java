@@ -1,10 +1,10 @@
 package com.auth0.service;
 
 import com.auth0.model.Employee;
-import com.auth0.model.EmployeeResponse;
+
 import org.springframework.data.domain.Page;
 
-import java.security.Principal;
+
 import java.util.List;
 
 public interface EmployeeService{
