@@ -124,6 +124,6 @@
       revisionDate:string,
       revisionNumber:string,
       totalAmount:string,
-      poBlobFile:FormData,
-      arrayOfLineItems:any
+      // file:FormData,
+      lineItemDTOList:any
     }

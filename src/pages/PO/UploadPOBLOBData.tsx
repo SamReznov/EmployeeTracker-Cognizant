@@ -3,6 +3,7 @@ import './UploadPOBLOBData.scss'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid';
 import { poBlobDataInterface } from '../../dataIntefaces/interfaces';
+import PoBlobService from '../../servises/PoBlobService';
 
 
 const UploadPOBLOBData = () => {
@@ -16,6 +17,10 @@ const UploadPOBLOBData = () => {
             id: uuidv4()
         }
     ])
+
+    const [file,setFile]=useState<any>();
+
+    
     
 
     const [poBlobData, setPoBlobData] = useState<poBlobDataInterface>({
@@ -23,12 +28,12 @@ const UploadPOBLOBData = () => {
         revisionDate:"",
         revisionNumber:"",
         totalAmount:"",
-        poBlobFile:new FormData(),
-        arrayOfLineItems:lineItemFields
+        // file:new FormData(),
+        lineItemDTOList:lineItemFields
     })
 
     
-
+    
 
 
     const addFields = () => {
@@ -50,7 +55,7 @@ const UploadPOBLOBData = () => {
         newfield = newfield.filter(input => input.id != id)
         console.log(newfield)
         setLineItemFields(newfield)
-        setPoBlobData({...poBlobData, "arrayOfLineItems":newfield})
+        setPoBlobData({...poBlobData, "lineItemDTOList":newfield})
     }
 
     const changeHandler = (id: String, event: any) => {
@@ -59,7 +64,7 @@ const UploadPOBLOBData = () => {
         newfield[index][event.target.name] = event.target.value
         setLineItemFields(newfield)
         console.log(poBlobData)
-        setPoBlobData({...poBlobData, "arrayOfLineItems":lineItemFields})
+        setPoBlobData({...poBlobData, "lineItemDTOList":lineItemFields})
     }
 
     const onChangeHandler = (e:any)=>{
@@ -70,14 +75,19 @@ const UploadPOBLOBData = () => {
     }
     const onUploadHandler = (e:any)=>{
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("pdfFile",e.target.files[0])
-        setPoBlobData({...poBlobData, [e.target.name]:formData})
+        // const formData = new FormData();
+        // formData.append("pdfFile",e.target.files[0])
+        // setPoBlobData({...poBlobData, [e.target.name]:formData})
+        setFile(e.target.files[0]);
     }
 
     const submitHandler = () => {
 
         console.log(poBlobData);
+        const formData = new FormData();
+        formData.append("blobData",JSON.stringify(poBlobData));
+        formData.append("file",file);
+        PoBlobService.sendPoBlobData(formData);
     }
 
     return (
@@ -91,7 +101,7 @@ const UploadPOBLOBData = () => {
                 </div>
                 <div className='form-group p-2'>
                     <label htmlFor='revisionDate'>Date Of This Revision : </label>
-                    <input name='revisionDate' type='text' onChange={onChangeHandler} />
+                    <input name='revisionDate' type='date' onChange={onChangeHandler} />
                 </div>
                 <div className='form-group p-2'>
                     <label htmlFor='revisionNumber'>Revision Number :</label>
@@ -102,8 +112,8 @@ const UploadPOBLOBData = () => {
                     <input name='totalAmount' type='text' onChange={onChangeHandler} />
                 </div>
                 <div className='form-group p-2'>
-                    <label htmlFor='poBlobFile'>Upload File :</label>
-                    <input name='poBlobFile' type='file' onChange={onUploadHandler} />
+                    <label htmlFor='file'>Upload File :</label>
+                    <input name='file' type='file' onChange={onUploadHandler} />
                 </div>
                 <div className=''>
                     {
@@ -123,7 +133,7 @@ const UploadPOBLOBData = () => {
                                 </div>
                                 <div className='input-group'>
                                     <label htmlFor='deliveryDate'>Delivery Date</label>
-                                    <input name='deliveryDate' value={input.deliveryDate} type='text' onChange={(e) => changeHandler(input.id, e)} />
+                                    <input name='deliveryDate' value={input.deliveryDate} type='date' onChange={(e) => changeHandler(input.id, e)} />
                                 </div>
                                 <div className='input-group'>
                                     <label htmlFor='tax'>TAX</label>

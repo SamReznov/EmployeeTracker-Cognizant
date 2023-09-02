@@ -58,7 +58,7 @@ public class POServiceImpl implements POService {
             existPO.setExtension(po.getExtension());
             existPO.setEmployeeList(po.getEmployeeList());
             existPO.setAccount(po.getAccount());
-            existPO.setPoBlobList(po.getPoBlobList());
+            existPO.setPoDataList(po.getPoDataList());
 
 
             return poDao.save(existPO);
