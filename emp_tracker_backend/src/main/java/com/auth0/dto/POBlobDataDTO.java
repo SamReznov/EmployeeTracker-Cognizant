@@ -1,6 +1,5 @@
 package com.auth0.dto;
 
-import com.auth0.model.PO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -3,7 +3,6 @@ package com.auth0.controller;
 import com.auth0.exception.EmployeeNotFoundException;
 import com.auth0.exception.ResourceNotFoundException;
 import com.auth0.model.AccountDetails;
-import com.auth0.model.Employee;
 import com.auth0.service.AccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
