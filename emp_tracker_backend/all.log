@@ -241,3 +241,6 @@
 2023-09-04 17:46:02.608 [main] INFO  com.auth0.DemoApplication - Starting DemoApplication using Java 18 with PID 2148 (C:\Users\imtiy\Desktop\Employee_Tracker_Cognizant_Git\EmployeeTracker-Cognizant-1\EmployeeTracker-Cognizant\emp_tracker_backend\target\classes started by imtiy in C:\Users\imtiy\Desktop\Employee_Tracker_Cognizant_Git\EmployeeTracker-Cognizant-1\EmployeeTracker-Cognizant\emp_tracker_backend)
 2023-09-04 17:46:02.624 [main] INFO  com.auth0.DemoApplication - No active profile set, falling back to 1 default profile: "default"
 2023-09-04 17:46:11.072 [main] INFO  com.auth0.DemoApplication - Started DemoApplication in 9.034 seconds (process running for 10.616)
+2023-09-04 18:03:57.047 [main] INFO  com.auth0.DemoApplication - Starting DemoApplication using Java 18 with PID 15708 (C:\Users\imtiy\Desktop\Employee_Tracker_Cognizant_Git\EmployeeTracker-Cognizant-1\EmployeeTracker-Cognizant\emp_tracker_backend\target\classes started by imtiy in C:\Users\imtiy\Desktop\Employee_Tracker_Cognizant_Git\EmployeeTracker-Cognizant-1\EmployeeTracker-Cognizant\emp_tracker_backend)
+2023-09-04 18:03:57.065 [main] INFO  com.auth0.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-09-04 18:04:09.571 [main] INFO  com.auth0.DemoApplication - Started DemoApplication in 13.348 seconds (process running for 15.718)
