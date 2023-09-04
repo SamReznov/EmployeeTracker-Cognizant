@@ -4,10 +4,26 @@ import { Button, Col, Form, Row } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid';
 import { poBlobDataInterface } from '../../dataIntefaces/interfaces';
 import PoBlobService from '../../servises/PoBlobService';
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 
+
+
+interface lineItemInterface{
+    lineItemNumber: string,
+    description: string,
+    extension: string,
+    deliveryDate: string,
+    tax: string,
+    id: string
+}
 const UploadPOBLOBData = () => {
-    const [lineItemFields, setLineItemFields] = useState([
+
+    const navigate=useNavigate();
+    const [lineItemFields, setLineItemFields] = useState<lineItemInterface[]>([
         {
             lineItemNumber: '',
             description: '',
@@ -79,7 +95,10 @@ const UploadPOBLOBData = () => {
         // formData.append("pdfFile",e.target.files[0])
         // setPoBlobData({...poBlobData, [e.target.name]:formData})
         setFile(e.target.files[0]);
+        
     }
+    
+    
 
     const submitHandler = () => {
 
@@ -87,7 +106,70 @@ const UploadPOBLOBData = () => {
         const formData = new FormData();
         formData.append("blobData",JSON.stringify(poBlobData));
         formData.append("file",file);
-        PoBlobService.sendPoBlobData(formData);
+        PoBlobService.sendPoBlobData(formData)
+        .then((response) => {
+            console.log(response.data);
+
+           
+            
+            
+            // setLineItemFields({
+            //     lineItemNumber: '',
+            // description: '',
+            // extension: '',
+            // deliveryDate: '',
+            // tax: '',
+            // id: uuidv4()
+            // } as any)
+            
+            // setPoBlobData({
+            //     poNumber:"",
+            //     revisionDate:"",
+            //     revisionNumber:"",
+            //     totalAmount:"",
+            //     lineItemDTOList:lineItemFields     
+            // });
+
+            toast.success(`${response.data}`, {
+              position: "top-center",
+
+              autoClose: 3000,
+
+              hideProgressBar: false,
+
+              closeOnClick: true,
+
+              pauseOnHover: true,
+
+              draggable: true,
+
+              progress: undefined,
+
+              onClose: () => navigate("/"),
+            });
+            
+            
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error(`${error.response.data}`, {
+                position: "top-center",
+  
+                autoClose: 3000,
+  
+                hideProgressBar: false,
+  
+                closeOnClick: true,
+  
+                pauseOnHover: true,
+  
+                draggable: true,
+  
+                progress: undefined,
+  
+                onClose: () => navigate("/"),
+              });
+          });
     }
 
     return (
@@ -97,19 +179,19 @@ const UploadPOBLOBData = () => {
                 <div className='text-center p-2'>
                 <div className='form-group p-2'>
                     <label htmlFor='poNumber'>PO Number :</label>
-                    <input name='poNumber' type='text' onChange={onChangeHandler} />
+                    <input name='poNumber' type='text' value={poBlobData.poNumber} onChange={onChangeHandler} />
                 </div>
                 <div className='form-group p-2'>
                     <label htmlFor='revisionDate'>Date Of This Revision : </label>
-                    <input name='revisionDate' type='date' onChange={onChangeHandler} />
+                    <input name='revisionDate' type='date' value={poBlobData.revisionDate} onChange={onChangeHandler} />
                 </div>
                 <div className='form-group p-2'>
                     <label htmlFor='revisionNumber'>Revision Number :</label>
-                    <input name='revisionNumber' type='text' onChange={onChangeHandler} />
+                    <input name='revisionNumber' type='text' value={poBlobData.revisionNumber} onChange={onChangeHandler} />
                 </div>
                 <div className='form-group p-2'>
                     <label htmlFor='totalAmount'>Total Amount :</label>
-                    <input name='totalAmount' type='text' onChange={onChangeHandler} />
+                    <input name='totalAmount' type='text' value={poBlobData.totalAmount} onChange={onChangeHandler} />
                 </div>
                 <div className='form-group p-2'>
                     <label htmlFor='file'>Upload File :</label>
@@ -154,6 +236,7 @@ const UploadPOBLOBData = () => {
                 </div>
             </div>
         </div>
+        <ToastContainer />
         </div>
     )
 }
