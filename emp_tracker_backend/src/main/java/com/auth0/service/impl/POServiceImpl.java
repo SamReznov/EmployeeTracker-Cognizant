@@ -103,6 +103,10 @@ public class POServiceImpl implements POService {
 
     @Override
     public Page<PO> findPOByPONumber(double poNumber, int pageNo) {
+
+        if(poNumber==0){
+            return findAllPoByPage(pageNo);
+        }
         Pageable pageable = PageRequest.of(pageNo - 1, 5);
         Page<PO> poPage=poDao.findByPoNumber(poNumber,pageable);
         if(poPage.getContent().size()>0){
