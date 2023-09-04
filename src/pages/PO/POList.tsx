@@ -8,33 +8,44 @@ import POEntity from "../../components/POEntity";
 import POService from "../../servises/POService";
 import { Pagination } from "@mui/material";
 import {poInterface,poPageInterface} from '../../dataIntefaces/interfaces';
+import SearchBar from "../../components/SearchBar";
 
 
 const POList = () => {
   
   const [poPage,setPoPage] = useState<poPageInterface>();
   const [page ,setPage] = useState<number>(1);
-  const [noOfPages,setNoOfPages] = useState<number|undefined>(0);
-
-    
-
+  const [noOfPages,setNoOfPages] = useState<number|undefined>(1);
+  const [searchedPoId,setSearchedPoId] = useState<string|any>("");
+  const [errorMessage,setErrorMessage ] = useState("");
+  
+  const onSearchHandler = (e:any)=>{
+    setNoOfPages(1);
+    setPage(1);
+    setSearchedPoId(e);
+    console.log("clicked")
+  }
 
     useEffect(()=>{
       
-      POService.getPoByPage(page).then((response)=>{
+      POService.getPoByPageAndPoId(page,searchedPoId).then((response)=>{
         setPoPage(response.data)
-        setNoOfPages(poPage?.totalPages)
-        console.log(response.data)
+        setNoOfPages(response.data.totalPages)
+        setErrorMessage("");
       })
       .catch((err)=>{
-        console.log(err)
+        console.log(err.response.data)
+        setErrorMessage(err.response.data)
       })
-    },[page,noOfPages])
+    },[page,noOfPages,searchedPoId])
 
 
     return (
-      <div className="App">
+      <div>
+        <SearchBar onSearchHandler={onSearchHandler}/>
+       {errorMessage ===""? <div className="App">
         <div className="table-container" role="table" aria-label="Destinations">
+        
           <div className="flex-table header" role="rowgroup">
             <div className="flex-row first" role="columnheader">
              PO Number
@@ -91,6 +102,7 @@ const POList = () => {
          defaultPage={1}
          onChange={(event,value)=>{setPage(value)}}
          />
+      </div>:<div className="errorMessage">{errorMessage}</div>}
       </div>
     );
 }

@@ -76,8 +76,8 @@ class POService{
 
     }
 
-    async getPoByPage(pageNo:number){
-        return await axios.get(`${PO_API_BASE_URL}?pageNo=${pageNo}`);
+    async getPoByPageAndPoId(pageNo:number,searchedPoId:any){
+        return await axios.get(`http://localhost:8080/api/po_by_po_number?pageNo=${pageNo}&poNumber=${searchedPoId}`);
     }
 
 
