@@ -1,6 +1,7 @@
 package com.auth0.service.impl;
 
 import com.auth0.dao.PODao;
+import com.auth0.exception.EmployeeNotFoundException;
 import com.auth0.exception.ResourceNotFoundException;
 import com.auth0.model.Employee;
 import com.auth0.model.PO;
@@ -98,5 +99,18 @@ public class POServiceImpl implements POService {
         Pageable pageable= PageRequest.of(pageNo-1,5);
         Page<PO> poPage=poDao.findAll(pageable);
         return poPage;
+    }
+
+    @Override
+    public Page<PO> findPOByPONumber(double poNumber, int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo - 1, 5);
+        Page<PO> poPage=poDao.findByPoNumber(poNumber,pageable);
+        if(poPage.getContent().size()>0){
+            return poPage;
+        }
+        else{
+            throw new EmployeeNotFoundException("We're sorry, but there are no Purchase Orders (POs) matching the PO number "+poNumber+" in our system. Please double-check the number");
+        }
+
     }
 }

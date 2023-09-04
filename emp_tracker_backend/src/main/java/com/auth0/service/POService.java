@@ -21,4 +21,6 @@ public interface POService {
     List<Employee> getAllEmployeeByPONumber(double poNumber);
 
     Page<PO> findAllPoByPage(int pageNo);
+
+    Page<PO> findPOByPONumber(double poNumber,int pageNo);
 }

@@ -1,6 +1,7 @@
 package com.auth0.controller;
 
 
+import com.auth0.exception.EmployeeNotFoundException;
 import com.auth0.exception.ResourceNotFoundException;
 import com.auth0.model.Employee;
 import com.auth0.model.PO;
@@ -90,6 +91,19 @@ public class POController {
             @RequestParam(value="pageNo") int pageNo
     ){
         Page<PO> poPage=poService.findAllPoByPage(pageNo);
+        return ResponseEntity.ok().body(poPage);
+    }
+
+    @GetMapping("/po_by_po_number")
+    ResponseEntity<?> getPoByPoNumber(@RequestParam(value="pageNo", defaultValue = "1") int pageNo,
+                                                  @RequestParam(value="poNumber", defaultValue = "0") double poNumber
+    ){
+        Page<PO> poPage;
+        try{
+            poPage=poService.findPOByPONumber(poNumber,pageNo);
+        }catch(EmployeeNotFoundException e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
         return ResponseEntity.ok().body(poPage);
     }
 
