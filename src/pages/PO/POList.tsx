@@ -51,8 +51,8 @@ const POList = () => {
              PO Number
             </div>
 
-          
             <div className="flex-row" role="columnheader">
+          
               PO Manager
             </div>
   
