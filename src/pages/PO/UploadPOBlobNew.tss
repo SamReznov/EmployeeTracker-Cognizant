@@ -1,86 +1,282 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './UploadPOBLOBData.scss'
 import { Button, Col, Form, Row } from 'react-bootstrap'
+import { v4 as uuidv4 } from 'uuid';
+import { poBlobDataInterface } from '../../dataIntefaces/interfaces';
+import PoBlobService from '../../servises/PoBlobService';
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 
+
+
+
+interface lineItemInterface{
+    lineItemNumber: string,
+    description: string,
+    extension: string,
+    deliveryDate: string,
+    tax: string,
+    id: string
+}
 const UploadPOBLOBData = () => {
 
-    const onClickHandler = (e:any)=>{
-        e.preventDefault();
+    const navigate=useNavigate();
+    const [lineItemFields, setLineItemFields] = useState<lineItemInterface[]>([
+        {
+            lineItemNumber: '',
+            description: '',
+            extension: '',
+            deliveryDate: '',
+            tax: '',
+            id: uuidv4()
+        }
+    ])
+
+    const [file,setFile]=useState<any>();
+
+    
+    
+
+    const [poBlobData, setPoBlobData] = useState<poBlobDataInterface>({
+        poNumber:"",
+        revisionDate:"",
+        revisionNumber:"",
+        totalAmount:"",
+        // file:new FormData(),
+        lineItemDTOList:lineItemFields
+    })
+    
+
+    const [formErrors, setFormErrors] = useState();
+    const [isSubmit, setIsSubmit] = useState(false);
+    
+
+
+    const addFields = () => {
+        let newfield = [...lineItemFields]
+        newfield.push({
+            lineItemNumber: '',
+            description: '',
+            extension: '',
+            deliveryDate: '',
+            tax: '',
+            id: uuidv4()
+        })
+        setLineItemFields(newfield)
+        
     }
 
-  return (
-    <div>
-        <Form>
+    const removeFields = (id: string) => {
+        let newfield = [...lineItemFields]
+        newfield = newfield.filter(input => input.id != id)
+        console.log(newfield)
+        setLineItemFields(newfield)
+        setPoBlobData({...poBlobData, "lineItemDTOList":newfield})
+    }
 
-        <Row className='mb-3'>
-            <Form.Group className="mb-3" as={Col} controlId="formBasicLineItem">
-                <Form.Label>Line Item</Form.Label>
-                <Form.Control type="number" placeholder="Line Item Number" />
-            </Form.Group>
+    const changeHandler = (id: String, event: any) => {
+        const index = lineItemFields.findIndex(f => f.id === id)
+        let newfield = [...lineItemFields] as any
+        newfield[index][event.target.name] = event.target.value
+        setLineItemFields(newfield)
+        console.log(poBlobData)
+        setPoBlobData({...poBlobData, "lineItemDTOList":lineItemFields})
+    }
 
-            <Form.Group className="mb-3" as={Col} controlId="formBasicRevision">
-                <Form.Label>Revision Number</Form.Label>
-                <Form.Control type="number" placeholder="Revision Number" />
-            </Form.Group>
-        </Row>
+    const onChangeHandler = (e:any)=>{
+        e.preventDefault();
+        console.log(poBlobData); 
+        setPoBlobData({...poBlobData, [e.target.name]:e.target.value})
 
-        <Row className='mb-3'>
-            <Form.Group className="mb-3" controlId="formLineItemDescription">
-                <Form.Label>Line Item Description</Form.Label>
-                <Form.Control as="textarea"  placeholder='Line Item Description' />
-            </Form.Group>
-        </Row>
-
-        <Row className='mb-3'>
-            <Form.Group className="mb-3" as={Col} controlId="formStartDate">
-                <Form.Label>Line Item Start Date</Form.Label>
-                <Form.Control type='date' placeholder='Line Item Start Date'/>
-            </Form.Group>
-
-            <Form.Group className="mb-3" as={Col} controlId="formEndDate">
-                    <Form.Label>Line Item End Date</Form.Label>
-                    <Form.Control type='date' placeholder='Line Item End Date'/>
-            </Form.Group>
-        </Row>
-      
-        <Row className='mb-3'>
-            <Form.Group className="mb-3" as={Col} controlId="formLineItemValue">
-                <Form.Label>Line Item Value</Form.Label>
-                <Form.Control type='number' placeholder='Line Item Value'/>
-            </Form.Group>
-
-            <Form.Group className="mb-3" as={Col} controlId="formLineItemValue">
-                <Form.Label>Total Amount</Form.Label>
-                <Form.Control type='number' placeholder='Total Amount'/>
-            </Form.Group>
-        </Row>
-
-        <Row className='mb-3'>
-            <Form.Group className="mb-3" as={Col} controlId="formLineItemValue">
-                    <Form.Label>Upload PO here</Form.Label>
-                    <Form.Control type='file' placeholder='Upload PO Here'/>
-            </Form.Group>
-
-            <Form.Group as={Col}>
-            <Form.Label>Click here to Automatically Populate Above Fields</Form.Label>
-                <Button variant="secondary" onClick={onClickHandler}>
-                    Populate Fields
-                </Button>
-            </Form.Group>
-            
-        </Row>
-
+    }
+    const onUploadHandler = (e:any)=>{
+        e.preventDefault();
+        // const formData = new FormData();
+        // formData.append("pdfFile",e.target.files[0])
+        // setPoBlobData({...poBlobData, [e.target.name]:formData})
+        setFile(e.target.files[0]);
         
-      
-      
-      
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
-    </div>
-  )
+    }
+    
+
+    
+    
+
+    const submitHandler = () => {
+
+        console.log(poBlobData);
+        const formData = new FormData();
+        formData.append("blobData",JSON.stringify(poBlobData));
+        formData.append("file",file);
+        PoBlobService.sendPoBlobData(formData)
+        .then((response) => {
+            console.log(response.data);
+
+           
+            
+            
+            // setLineItemFields({
+            //     lineItemNumber: '',
+            // description: '',
+            // extension: '',
+            // deliveryDate: '',
+            // tax: '',
+            // id: uuidv4()
+            // } as any)
+            
+            // setPoBlobData({
+            //     poNumber:"",
+            //     revisionDate:"",
+            //     revisionNumber:"",
+            //     totalAmount:"",
+            //     lineItemDTOList:lineItemFields     
+            // });
+
+            toast.success(`${response.data}`, {
+              position: "top-center",
+
+              autoClose: 3000,
+
+              hideProgressBar: false,
+
+              closeOnClick: true,
+
+              pauseOnHover: true,
+
+              draggable: true,
+
+              progress: undefined,
+
+              onClose: () => navigate("/"),
+            });
+            
+            
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error(`${error.response.data}`, {
+                position: "top-center",
+  
+                autoClose: 3000,
+  
+                hideProgressBar: false,
+  
+                closeOnClick: true,
+  
+                pauseOnHover: true,
+  
+                draggable: true,
+  
+                progress: undefined,
+  
+                onClose: () => navigate("/addPO"),
+              });
+          });
+    }
+
+    const validate = (values: any) => {
+        const errors: any = {};
+        const regexId = /^[0-9]*$/;
+        const regexName = /^[A-Za-z\s]{2,50}$/;
+        
+        if (!values.poNumber) {
+            errors.poNumber = "Id is required!";
+        } else if (!regexId.test(values.poNumber)) {
+            errors.poNumber = "Id should be digits only!";
+        }
+
+        if (!values.poManager) {
+            errors.accName = "Manager name is required!";
+        } else if (!regexName.test(values.accName)) {
+            errors.accName = "Manager name should me minimum of 2 characters!";
+        }
+        return errors;
+    };
+
+
+    return (
+        <div className='container'>
+            <div className='card'>
+            <div className='card-body'>
+                <div className='text-center p-2'>
+                <div className='form-group p-2'>
+                    <label htmlFor='poNumber'>PO Number :</label>
+                    <input name='poNumber' type='text' value={poBlobData.poNumber} onChange={onChangeHandler} required/>
+                </div>
+                <div className='form-group p-2'>
+                    <label htmlFor='revisionDate'>Date Of This Revision : </label>
+                    <input name='revisionDate' type='date' value={poBlobData.revisionDate} onChange={onChangeHandler} />
+                </div>
+                <div className='form-group p-2'>
+                    <label htmlFor='revisionNumber'>Revision Number :</label>
+                    <input name='revisionNumber' type='text' value={poBlobData.revisionNumber} onChange={onChangeHandler} />
+                </div>
+                <div className='form-group p-2'>
+                    <label htmlFor='totalAmount'>Total Amount :</label>
+                    <input name='totalAmount' type='text' value={poBlobData.totalAmount} onChange={onChangeHandler} />
+                </div>
+                <div className='form-group p-2'>
+                    <label htmlFor='file'>Upload File :</label>
+                    <input name='file' type='file' onChange={onUploadHandler} />
+                </div>
+                <div className=''>
+                    {
+                        lineItemFields.map(input => (
+                            <div className='form-row'>
+                                <div className='input-group'>
+                                    <label htmlFor='lineItemNumber'>Line Item Number</label>
+                                    <input name='lineItemNumber' type='text' value={input.lineItemNumber} onChange={(e) => changeHandler(input.id, e)} />
+                                </div>
+                                <div className='input-group'>
+                                    <label htmlFor='description'>Description</label>
+                                    <textarea name='description' value={input.description} onChange={(e) => changeHandler(input.id, e)} />
+                                </div>
+                                <div className='input-group'>
+                                    <label htmlFor='extension'>Extension</label>
+                                    <input name='extension' value={input.extension} type='text' onChange={(e) => changeHandler(input.id, e)} />
+                                </div>
+                                <div className='input-group'>
+                                    <label htmlFor='deliveryDate'>Delivery Date</label>
+                                    <input name='deliveryDate' value={input.deliveryDate} type='date' onChange={(e) => changeHandler(input.id, e)} />
+                                </div>
+                                <div className='input-group'>
+                                    <label htmlFor='tax'>TAX</label>
+                                    <input name='tax'value={input.tax} type='text' onChange={(e) => changeHandler(input.id, e)} />
+                                </div>
+                                {
+                                    lineItemFields.length > 1 && <Button variant="danger"  onClick={() => removeFields(input.id)}>-</Button>
+                                }
+                                
+                                {/* {
+                                    lineItemFields.length == 1 && <Button variant="primary" color='success' onClick={addFields}>+</Button>
+                                } */}
+                                
+
+                                
+                            </div>
+
+                        ))
+                        
+                    }
+                    <div className='input-group'>
+                    {
+                            lineItemFields.length && <Button variant="primary" color='success' onClick={addFields}>Click Here To Add New Line Item</Button>
+                    }
+                                   
+                    </div>
+                    
+                    <Button className='btn-success' onClick={submitHandler}>Submit</Button>
+
+                </div>
+                </div>
+            </div>
+        </div>
+        <ToastContainer />
+        </div>
+    )
 }
 
 export default UploadPOBLOBData

@@ -13,6 +13,8 @@ import { Dropdown } from "react-bootstrap";
 import ProjectService from "../../servises/ProjectService";
 import { useSelector } from "react-redux";
 import { wrap } from "module";
+import {CSVDownload, CSVLink} from 'react-csv';
+
 
 
 
@@ -28,6 +30,7 @@ function EmployeeList() {
   const [selectedProjectName,setSelectedProjectName] = useState<string>("Select Project");
   const [selectedProjectId,setSelectedProjectId] = useState<number|any>(0);
   const [errorMessage,setErrorMessage ] = useState("");
+  const[employee,setEmployee]=useState<any>("");
 
   const user  = useSelector((state:any)=>state.user.currentUser)
 
@@ -50,6 +53,7 @@ function EmployeeList() {
           console.log(res.data)
           setEmployeePage(res.data);
           setNoOfPages(res.data.totalPages)
+          setEmployee(res.data.content)
          
           console.log("no of pages " +res.data.totalPages )
           console.log("no of employee " + res.data.totalElements)
@@ -83,7 +87,7 @@ function EmployeeList() {
     }
   
 
- 
+    
 
   return (
 
@@ -110,6 +114,10 @@ function EmployeeList() {
           
           <div>
             <SearchBar onSearchHandler={onSearchHandler}/>
+          </div>
+          <div>
+            {/* <CSVLink data={employee} className="btn btn-success">Export Data</CSVLink> */}
+            {/* <CSVDownload data={projects}></CSVDownload> */}
           </div>
 
        </div>
