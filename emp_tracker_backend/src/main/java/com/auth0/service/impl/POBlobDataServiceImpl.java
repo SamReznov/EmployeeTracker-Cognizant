@@ -44,7 +44,7 @@ public class POBlobDataServiceImpl implements POBlobDataService {
                 poBlobDao.save(poBlobData);
             }
         }else{
-            throw new ResourceNotFoundException("The Purchase Order (PO) number you mentioned is not found in our records. Please double-check the PO number");
+            throw new ResourceNotFoundException("The Purchase Order (PO) number you provided is not currently in our records. Please proceed to add this new PO to our records for processing.");
         }
 
 
