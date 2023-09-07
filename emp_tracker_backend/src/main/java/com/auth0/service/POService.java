@@ -1,5 +1,6 @@
 package com.auth0.service;
 
+import com.auth0.dto.POExcelDataDTO;
 import com.auth0.model.Employee;
 import com.auth0.model.PO;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,8 @@ public interface POService {
     String savePO(PO po);
 
     List<PO> getPOs();
+
+    List<POExcelDataDTO> getPOExcelData();
 
     PO getPOById(double poNumber);
 

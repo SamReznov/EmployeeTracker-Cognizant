@@ -1,6 +1,7 @@
 package com.auth0.controller;
 
 
+import com.auth0.dto.POExcelDataDTO;
 import com.auth0.exception.EmployeeNotFoundException;
 import com.auth0.exception.ResourceNotFoundException;
 import com.auth0.model.Employee;
@@ -39,6 +40,12 @@ public class POController {
     ResponseEntity<List<PO>> getAllPOs(){
         List<PO> poList=poService.getPOs();
         return ResponseEntity.ok().body(poList);
+    }
+
+    @GetMapping("/po_for_excel_data")
+    ResponseEntity<List<POExcelDataDTO>> getAllPOForExcelData(){
+        List<POExcelDataDTO> poExcelDataDTOList=poService.getPOExcelData();
+        return ResponseEntity.ok().body(poExcelDataDTOList);
     }
 
     @GetMapping("/po/{poNumber}")

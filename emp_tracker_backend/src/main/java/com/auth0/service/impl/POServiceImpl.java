@@ -1,6 +1,7 @@
 package com.auth0.service.impl;
 
 import com.auth0.dao.PODao;
+import com.auth0.dto.POExcelDataDTO;
 import com.auth0.exception.EmployeeNotFoundException;
 import com.auth0.exception.ResourceNotFoundException;
 import com.auth0.model.Employee;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +36,14 @@ public class POServiceImpl implements POService {
     @Override
     public List<PO> getPOs() {
         return poDao.findAll();
+    }
+
+    @Override
+    public List<POExcelDataDTO> getPOExcelData() {
+        List<PO> poList=new ArrayList<>();
+        poList=poDao.findAll();
+        List<POExcelDataDTO> poExcelDataDTOList=POExcelDataDTO.convertPOToPOExcelDTO(poList);
+        return poExcelDataDTOList;
     }
 
     @Override
