@@ -49,9 +49,10 @@ const Preset= () => {
     
 
     return(
-      <div >
 
-        <select onChange={handleTableChange}> 
+      
+      <div>
+        <select className="dropdownStyle" onChange={handleTableChange}> 
             <option value="⬇️ Choose an Option ⬇️"> -- Choose an Option -- </option>
             {tables.map((table) => <option value={table.value}>{table.label}</option>)}
         </select>

@@ -9,6 +9,8 @@ import POService from "../../servises/POService";
 import { Pagination } from "@mui/material";
 import {poInterface,poPageInterface} from '../../dataIntefaces/interfaces';
 import SearchBar from "../../components/SearchBar";
+import { Button } from "react-bootstrap";
+import ExportExcel from "../../excel/ExportExcel";
 
 
 
@@ -40,10 +42,30 @@ const POList = () => {
       })
     },[page,noOfPages,searchedPoId])
 
+    const onExportHandler = (e:any)=>{
+      e.preventDefault();
+      POService.getPOForExcelData().then((response)=>{
+      ExportExcel.exportToExcel(response.data,"poData_excel_export");
+      })
+      .catch((err)=>{
+        console.log(err.data)
+      })
+     
+    }
+
 
     return (
-      <div>
+      <div className="text-center">
+        
+        <div className="displayInline">
         <SearchBar onSearchHandler={onSearchHandler}/>
+        
+        <button className="btn btn-outline-success buttonSize m-2" onClick={onExportHandler}>Export Data</button>
+      
+
+        </div>
+        
+
        {errorMessage ===""? <div className="App">
         <div className="table-container" role="table" aria-label="Destinations">
         

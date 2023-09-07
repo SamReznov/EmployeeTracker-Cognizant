@@ -40,6 +40,19 @@ class POService{
     }
 
 
+    getPOForExcelData(){
+
+
+
+
+        return axios.get("http://localhost:8080/api/po_for_excel_data");
+
+
+
+
+    }
+
+
 
 
     getPOById(id:number){
