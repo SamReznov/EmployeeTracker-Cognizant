@@ -86,6 +86,11 @@ class EmployeeService{
         return  axios.get(`http://localhost:8080/api/project/${projectId}/emp?pageNo=${pageNo}&name=${name}`);
     }
 
+    getEmployeeByProjectAndNameForExcelData(projectId:number,name:string){
+        console.log("---"+name+"----"+projectId +"---")
+        return  axios.get(`http://localhost:8080/api/project/${projectId}/emp_for_excel_data?name=${name}`);
+    }
+
     // async searchEmployeeByTheirName(pageNo:number,name:string){
     //     return await axios.get(`http://localhost:8080/api/employeeSearch/${name}?pageNo=${pageNo}`)
     // }

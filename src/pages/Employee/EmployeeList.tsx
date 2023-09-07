@@ -14,6 +14,7 @@ import ProjectService from "../../servises/ProjectService";
 import { useSelector } from "react-redux";
 import { wrap } from "module";
 import {CSVDownload, CSVLink} from 'react-csv';
+import { error } from "console";
 
 
 
@@ -30,7 +31,7 @@ function EmployeeList() {
   const [selectedProjectName,setSelectedProjectName] = useState<string>("Select Project");
   const [selectedProjectId,setSelectedProjectId] = useState<number|any>(0);
   const [errorMessage,setErrorMessage ] = useState("");
-  const[employee,setEmployee]=useState<any>("");
+  const[employee,setEmployee]=useState<any[]>([]);
 
   const user  = useSelector((state:any)=>state.user.currentUser)
 
@@ -85,6 +86,16 @@ function EmployeeList() {
       setPage(1);
       setName(e);
     }
+
+    const excelExportHandler = () => {
+      EmployeeService.getEmployeeByProjectAndNameForExcelData(selectedProjectId,name)
+      .then(response => {
+        setEmployee(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
   
 
     
@@ -116,7 +127,7 @@ function EmployeeList() {
             <SearchBar onSearchHandler={onSearchHandler}/>
           </div>
           <div>
-            {/* <CSVLink data={employee} className="btn btn-success">Export Data</CSVLink> */}
+            <CSVLink data={employee} filename="EmployeeData" className="btn btn-success" onClick={excelExportHandler}>Export Data</CSVLink>
             {/* <CSVDownload data={projects}></CSVDownload> */}
           </div>
 

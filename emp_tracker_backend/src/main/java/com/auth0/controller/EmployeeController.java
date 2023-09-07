@@ -2,6 +2,7 @@ package com.auth0.controller;
 
 import com.auth0.dao.EmployeeDao;
 import com.auth0.dao.ProjectDao;
+import com.auth0.dto.EmployeeExcelDataDTO;
 import com.auth0.exception.EmployeeNotFoundException;
 import com.auth0.exception.ResourceNotFoundException;
 import com.auth0.model.Employee;
@@ -52,6 +53,12 @@ public class EmployeeController {
     ResponseEntity<List<Employee>> getAllEmployees(){
         List employeeList=employeeService.getEmployees();
         return ResponseEntity.ok().body(employeeList);
+    }
+
+    @GetMapping("/employees_excel_data")
+    ResponseEntity<List<EmployeeExcelDataDTO>> getAllEmployeesExcelData(){
+        List<EmployeeExcelDataDTO> employeeExcelDataList=employeeService.getEmployeesExcelData();
+        return ResponseEntity.ok().body(employeeExcelDataList);
     }
 
     @GetMapping("/employee/{empId}")
@@ -147,6 +154,19 @@ public class EmployeeController {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok().body(employeePage);
+    }
+
+    @GetMapping("/project/{projectId}/emp_for_excel_data")
+    ResponseEntity<?> getEmployeeByProjectAndNameForExcelData(@PathVariable long projectId,
+                                                  @RequestParam(value="name", defaultValue = "") String name
+    ){
+        List<EmployeeExcelDataDTO> employeeExcelDataDTOList;
+        try{
+            employeeExcelDataDTOList=employeeService.findAllEmployeeByProjectAndNameForExcelData(projectId,name);
+        }catch(EmployeeNotFoundException e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok().body(employeeExcelDataDTOList);
     }
 
 }

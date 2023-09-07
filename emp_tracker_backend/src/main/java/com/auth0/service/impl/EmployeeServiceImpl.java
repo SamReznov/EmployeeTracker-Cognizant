@@ -3,6 +3,7 @@ package com.auth0.service.impl;
 import com.auth0.controller.Auth0TestController;
 import com.auth0.dao.EmployeeDao;
 import com.auth0.dao.ProjectDao;
+import com.auth0.dto.EmployeeExcelDataDTO;
 import com.auth0.exception.EmployeeNotFoundException;
 import com.auth0.model.Employee;
 import com.auth0.model.Project;
@@ -34,6 +35,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private ProjectService projectService;
 
+
+
     @Override
     public String saveEmployee(Employee employee){
         if(employeeDao.findById(employee.getCtsEmpId()).isPresent()) {
@@ -64,6 +67,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getEmployees() {
         List<Employee> employeeList=employeeDao.findAll();
         return employeeList;
+    }
+
+    @Override
+    public List<EmployeeExcelDataDTO> getEmployeesExcelData() {
+        List<Employee> employeeList=employeeDao.findAll();
+        List<EmployeeExcelDataDTO> employeeExcelDataDTOList=EmployeeExcelDataDTO.convertEmployeeToEmployeeExcelDTO(employeeList);
+        return employeeExcelDataDTOList;
     }
 
     @Override
@@ -201,6 +211,57 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
         }
 
+
+    }
+
+    @Override
+    public List<EmployeeExcelDataDTO> findAllEmployeeByProjectAndNameForExcelData(long projectId, String name) {
+        if(projectId == 0 && !name.equals("")){
+            List<Employee> employeeList=employeeDao.findByEmpFirstNameContaining(name);
+            if(employeeList.size()>0){
+                return EmployeeExcelDataDTO.convertEmployeeToEmployeeExcelDTO(employeeList);
+            }
+            else{
+                throw new EmployeeNotFoundException("Apologies, but there are no records of an employee named "+name+" in our system. Please verify the name.");
+            }
+
+        }
+        else if(projectId == 0 && name.equals("")){
+
+            List<Employee> employeeList=getEmployees();
+            if(employeeList.size()>0){
+                return EmployeeExcelDataDTO.convertEmployeeToEmployeeExcelDTO(employeeList);
+            }else{
+                throw new EmployeeNotFoundException("Currently, there are no employees to display. The list is empty at the moment.");
+            }
+        }
+
+        else if(projectId != 0 && name.equals("")) {
+            Optional<Project> project=projectDao.findById(projectId);
+            List<Employee> employeeList = employeeDao.findByProject(project.get());
+            if(employeeList.size()>0){
+                return EmployeeExcelDataDTO.convertEmployeeToEmployeeExcelDTO(employeeList);
+            }
+            else{
+                throw new EmployeeNotFoundException("At the moment, there are no employees associated with this project. The list is currently empty.");
+            }
+
+        }
+        else{
+            Optional<Project> project=projectDao.findById(projectId);
+            if(project.isPresent()) {
+
+                List<Employee> employeeList=employeeDao.findByProjectAndEmpFirstNameContaining(project.get(),name);
+                if(employeeList.size()>0){
+                    return EmployeeExcelDataDTO.convertEmployeeToEmployeeExcelDTO(employeeList);
+                }else{
+                    throw new EmployeeNotFoundException("We apologize, but there are no records of an employee named "+name+" associated with the project "+project.get().getProjectName()+". Please double-check the details");
+                }
+            }
+            else{
+                throw new EmployeeNotFoundException("Oops! We couldn't find any records matching the provided project ID:"+projectId+"\nPlease double-check the ID and try again.");
+            }
+        }
 
     }
 
