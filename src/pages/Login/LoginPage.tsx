@@ -46,7 +46,8 @@ const LoginPage = () => {
  
 
   return (
-    <div className="loginDesign">
+    <form>
+      <div className="loginDesign">
       <MDBContainer fluid>
         <MDBRow className="d-flex justify-content-center align-items-center h-50">
           <MDBCol col="12">
@@ -79,7 +80,7 @@ const LoginPage = () => {
                   onChange={onChangeHandler}
                 />
 
-                <Button variant="primary" size="lg" onClick={onClickHandler}>
+                <Button variant="primary" size="lg" onClick={onClickHandler} type="submit">
                   Log In
                 </Button>
 
@@ -98,6 +99,7 @@ const LoginPage = () => {
       </MDBContainer>
       <ToastContainer/>
     </div>
+    </form>
   );
 };
 
