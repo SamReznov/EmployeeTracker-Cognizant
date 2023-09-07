@@ -15,7 +15,7 @@ const Mock = () => {
 
   return (
     <div>
-        <ExportExcel excelData={data} fileName={"Excel Export"}/>
+        {/* <ExportExcel excelData={data} fileName={"Excel Export"}/> */}
     </div>
   )
 }

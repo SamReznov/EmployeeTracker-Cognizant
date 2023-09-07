@@ -9,19 +9,18 @@ import "bootstrap/dist/css/bootstrap.css";
 import { useOutletContext } from "react-router-dom";
 import SearchBar from "../../components/SearchBar";
 import {employeePageInterface,employeeInterface,projectInterface} from '../../dataIntefaces/interfaces'
-import { Dropdown } from "react-bootstrap";
+import { Button, Dropdown } from "react-bootstrap";
 import ProjectService from "../../servises/ProjectService";
 import { useSelector } from "react-redux";
-import { wrap } from "module";
-import {CSVDownload, CSVLink} from 'react-csv';
 import { error } from "console";
+import ExportExcel from "../../excel/ExportExcel";
 
 
 
 
 
 
-function EmployeeList() {
+function EmployeeList(this: any) {
  
   const [page ,setPage] = useState<number|any>(1);
   const [name,setName] = useState<string|any>("");
@@ -31,7 +30,8 @@ function EmployeeList() {
   const [selectedProjectName,setSelectedProjectName] = useState<string>("Select Project");
   const [selectedProjectId,setSelectedProjectId] = useState<number|any>(0);
   const [errorMessage,setErrorMessage ] = useState("");
-  const[employee,setEmployee]=useState<any[]>([]);
+  const [employeeExcelData,setEmployeeExcelData]=useState<any[]>([]);
+  
 
   const user  = useSelector((state:any)=>state.user.currentUser)
 
@@ -45,16 +45,14 @@ function EmployeeList() {
       console.log(err.data)
     })
   },[])
-    
+
 
     useEffect(() => {
       EmployeeService.getEmployeeByProjectAndNamePage(page,selectedProjectId,name)
-  
         .then((res) => {
           console.log(res.data)
           setEmployeePage(res.data);
           setNoOfPages(res.data.totalPages)
-          setEmployee(res.data.content)
          
           console.log("no of pages " +res.data.totalPages )
           console.log("no of employee " + res.data.totalElements)
@@ -85,20 +83,19 @@ function EmployeeList() {
       setNoOfPages(1);
       setPage(1);
       setName(e);
+    } 
+
+    const onExportHandler = (e:any)=>{
+      e.preventDefault();
+      EmployeeService.getEmployeeByProjectAndNameForExcelData(selectedProjectId,name).then((response)=>{
+      ExportExcel.exportToExcel(response.data,selectedProjectName+"_excel_export");
+      })
+      .catch((err)=>{
+        console.log(err.data)
+      })
+     
     }
 
-    const excelExportHandler = () => {
-      EmployeeService.getEmployeeByProjectAndNameForExcelData(selectedProjectId,name)
-      .then(response => {
-        setEmployee(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
-    }
-  
-
-    
 
   return (
 
@@ -126,9 +123,9 @@ function EmployeeList() {
           <div>
             <SearchBar onSearchHandler={onSearchHandler}/>
           </div>
-          <div>
-            <CSVLink data={employee} filename="EmployeeData" className="btn btn-success" onClick={excelExportHandler}>Export Data</CSVLink>
-            {/* <CSVDownload data={projects}></CSVDownload> */}
+
+          <div >
+          <Button className="btn btn-success" onClick={onExportHandler}>Export Data</Button>
           </div>
 
        </div>
