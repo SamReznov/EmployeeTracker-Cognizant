@@ -125,7 +125,7 @@ function EmployeeList(this: any) {
           </div>
 
           <div >
-          <Button className="btn btn-success" onClick={onExportHandler}>Export Data</Button>
+          <button className="btn btn-outline-success" onClick={onExportHandler}>Export Data</button>
           </div>
 
        </div>
