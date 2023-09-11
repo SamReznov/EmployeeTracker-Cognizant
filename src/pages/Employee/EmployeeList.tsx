@@ -14,6 +14,7 @@ import ProjectService from "../../servises/ProjectService";
 import { useSelector } from "react-redux";
 import { error } from "console";
 import ExportExcel from "../../excel/ExportExcel";
+import ExportConfirmation from "../../components/ConfiramtionPOPUPS/ExportConfirmation";
 
 
 
@@ -31,7 +32,7 @@ function EmployeeList(this: any) {
   const [selectedProjectId,setSelectedProjectId] = useState<number|any>(0);
   const [errorMessage,setErrorMessage ] = useState("");
   const [employeeExcelData,setEmployeeExcelData]=useState<any[]>([]);
-  
+  const [showDialogue,setShowDialogue] = useState(false)
 
   const user  = useSelector((state:any)=>state.user.currentUser)
 
@@ -86,7 +87,6 @@ function EmployeeList(this: any) {
     } 
 
     const onExportHandler = (e:any)=>{
-      e.preventDefault();
       EmployeeService.getEmployeeByProjectAndNameForExcelData(selectedProjectId,name).then((response)=>{
       ExportExcel.exportToExcel(response.data,selectedProjectName+"_excel_export");
       })
@@ -100,6 +100,9 @@ function EmployeeList(this: any) {
   return (
 
       <div>
+        { showDialogue &&<ExportConfirmation setVisable = {setShowDialogue} projectName = {selectedProjectName} exportHandler = {onExportHandler}/>}
+        
+
         <div className="displayFlex">
           <div className="dropdownItems">
               <span id="filterLabel">Filter By Project</span>
@@ -125,7 +128,7 @@ function EmployeeList(this: any) {
           </div>
 
           <div >
-          <button className="btn btn-outline-success" onClick={onExportHandler}>Export Data</button>
+          <button className="btn btn-outline-success" onClick={()=>setShowDialogue(true)}>Export Data</button>
           </div>
 
        </div>

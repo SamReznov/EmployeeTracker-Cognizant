@@ -11,6 +11,7 @@ import {poInterface,poPageInterface} from '../../dataIntefaces/interfaces';
 import SearchBar from "../../components/SearchBar";
 import { Button } from "react-bootstrap";
 import ExportExcel from "../../excel/ExportExcel";
+import ExportConfirmation from "../../components/ConfiramtionPOPUPS/ExportConfirmation";
 
 
 
@@ -21,7 +22,8 @@ const POList = () => {
   const [noOfPages,setNoOfPages] = useState<number|undefined>(1);
   const [searchedPoId,setSearchedPoId] = useState<string|any>("");
   const [errorMessage,setErrorMessage ] = useState("");
-  
+  const [showDialogue,setShowDialogue] = useState(false)
+
   const onSearchHandler = (e:any)=>{
     setNoOfPages(1);
     setPage(1);
@@ -43,7 +45,6 @@ const POList = () => {
     },[page,noOfPages,searchedPoId])
 
     const onExportHandler = (e:any)=>{
-      e.preventDefault();
       POService.getPOForExcelData().then((response)=>{
       ExportExcel.exportToExcel(response.data,"poData_excel_export");
       })
@@ -56,11 +57,11 @@ const POList = () => {
 
     return (
       <div className="text-center">
-        
+        { showDialogue &&<ExportConfirmation setVisable = {setShowDialogue} projectName = {"PO"} exportHandler = {onExportHandler}/>}
         <div className="displayInline">
         <SearchBar onSearchHandler={onSearchHandler}/>
         
-        <button className="btn btn-outline-success buttonSize m-2" onClick={onExportHandler}>Export Data</button>
+        <button className="btn btn-outline-success buttonSize m-2" onClick={()=>setShowDialogue(true)}>Export Data</button>
       
 
         </div>
