@@ -6519,3 +6519,6 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired at 2023-09-11T13:45:59Z. Curren
 2023-09-12 01:01:06.551 [http-nio-8080-exec-2] WARN  com.auth0.config.JwtAuthenticationFilter - Couldn't find bearer string, header will be ignored
 2023-09-12 01:02:48.276 [http-nio-8080-exec-3] WARN  com.auth0.config.JwtAuthenticationFilter - Couldn't find bearer string, header will be ignored
 2023-09-12 01:02:48.297 [http-nio-8080-exec-7] WARN  com.auth0.config.JwtAuthenticationFilter - Couldn't find bearer string, header will be ignored
+2023-09-12 01:05:49.653 [main] INFO  com.auth0.DemoApplication - Starting DemoApplication using Java 17.0.6 with PID 12380 (C:\Users\Samar\Desktop\Employe Tracker Cognizant git\EmployeeTracker-Cognizant\emp_tracker_backend\target\classes started by Samar in C:\Users\Samar\Desktop\Employe Tracker Cognizant git\EmployeeTracker-Cognizant\emp_tracker_backend)
+2023-09-12 01:05:49.667 [main] INFO  com.auth0.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-09-12 01:05:54.627 [main] INFO  com.auth0.DemoApplication - Started DemoApplication in 5.346 seconds (process running for 6.023)
