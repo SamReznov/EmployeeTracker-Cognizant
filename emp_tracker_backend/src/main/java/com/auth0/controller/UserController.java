@@ -117,8 +117,14 @@ public class UserController {
     }
 
     @GetMapping("/current-user")
-    public String getLoggedInUser(Principal principal){
-        return principal.getName();
+    public ResponseEntity<?> getLoggedInUser(Principal principal){
+        if(principal!=null){
+            return ResponseEntity.ok().body(principal.getName());
+        }
+       else{
+            return new ResponseEntity<String>("User Token Has Expired Please Log in Again", HttpStatus.valueOf(401));
+        }
+
     }
 
 }
