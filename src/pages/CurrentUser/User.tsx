@@ -66,6 +66,7 @@ function User() {
         UserService.getCurrentUser()
         .then(response=>{
             setCurrentUser(response.data)
+            console.log(response.data)
         }).catch(error=>{
             console.log(error)
         })

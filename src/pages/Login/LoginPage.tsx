@@ -15,9 +15,6 @@ import { Button } from "react-bootstrap";
 import { login } from "../../redux/apiCalls";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
 
 interface creditentials{
   username:string|undefined,

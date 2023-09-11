@@ -26,9 +26,13 @@ import AddESARate from './pages/Preset/ESARateCard/AddESARate';
 import UpdateESARate from './pages/Preset/ESARateCard/UpdateESARate';
 import AddService from './pages/Preset/Service/AddService';
 import UpdateService from './pages/Preset/Service/UpdateService';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import LoginPage from './pages/Login/LoginPage';
 import SignUpPage from './pages/SignUp/SignUpPage';
+import React from 'react';
+import UserService from './servises/UserService';
+import { logOut } from './redux/userRedux';
+
 
 const headerProps: AppHeaderProps = {
   title: 'Employee tracker',
@@ -46,10 +50,20 @@ const headerProps: AppHeaderProps = {
 };
 
 function App() {
+  const dispatch = useDispatch();
+  React.useEffect(()=>{
+    UserService.getCurrentUser().then((response)=>{
+      console.log("user session Still Valid")
+    })
+    .catch(()=>{
+      dispatch(logOut({}))
+      console.log("please log in again session expired")
+    })
+  },[])
 
 
   const user  = useSelector((state:any)=>state.user.currentUser)
-  console.log(user)
+  
   return (
     <BrowserRouter>
     
@@ -99,4 +113,6 @@ function App() {
 }
 
 export default App;
+
+
 //this is my comment2
