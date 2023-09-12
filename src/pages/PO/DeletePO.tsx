@@ -9,6 +9,7 @@ import POService from '../../servises/POService';
 import POEntity from '../../components/POEntity';
 import {poInterface} from '../../dataIntefaces/interfaces'
 import POList from './POList';
+import GeneralConfirmation from '../../components/ConfiramtionPOPUPS/GeneralConfirmation';
 
 const DeletePO = () => {
     const [item, setItem] = useState<poInterface[]>([]);
@@ -16,18 +17,15 @@ const DeletePO = () => {
     const [id, setId] = useState<string>();
     const [formError, setFormError] = useState<string>();
     const [response,setResponse]=useState<any>("")
-  
+    const [showDialogue,setShowDialogue] = useState(false)
+    const popupMessage = "Are You sure you want to delete PO of Id: "+id;
     useEffect(() => {
       POService.getPO().then((res) => {
          setItem(res.data);
      });
     }, []);
 
-    // useEffect(()=>{
-    //   console.log("---Use Effect called---")
-    // },[response])
-  
-    //handling local storage
+
   
     const deleteItems = () => {
       setFormError(validate());
@@ -94,6 +92,7 @@ const DeletePO = () => {
   
     return (
       <>
+      { showDialogue && <GeneralConfirmation setVisable = {setShowDialogue} message = {popupMessage} operationHandler = {deleteItems}/>}
       <AppHeader/>
         <div>
           <h3>Delete PO using Id</h3>
@@ -110,7 +109,7 @@ const DeletePO = () => {
             <button
               className="btn btn-outline-info"
               type="button"
-              onClick={deleteItems}
+              onClick={()=>setShowDialogue(true)}
             >
               Delete
             </button>

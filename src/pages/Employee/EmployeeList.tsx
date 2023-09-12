@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
-
 import EmployeeService from "../../servises/EmployeeService";
 import Entity from "../../components/Entity";
-//import { Pagination,Row,Col,PaginationItem,PaginationLink } from "reactstrap";
 import { Pagination } from "@mui/material";
 import './EmployeeList.scss'
 import "bootstrap/dist/css/bootstrap.css";
-import { useOutletContext } from "react-router-dom";
 import SearchBar from "../../components/SearchBar";
 import {employeePageInterface,employeeInterface,projectInterface} from '../../dataIntefaces/interfaces'
 import { Button, Dropdown } from "react-bootstrap";
 import ProjectService from "../../servises/ProjectService";
 import { useSelector } from "react-redux";
-import { error } from "console";
 import ExportExcel from "../../excel/ExportExcel";
-import ExportConfirmation from "../../components/ConfiramtionPOPUPS/ExportConfirmation";
+import GeneralConfirmation from "../../components/ConfiramtionPOPUPS/GeneralConfirmation";
 
 
 
@@ -33,9 +29,8 @@ function EmployeeList(this: any) {
   const [errorMessage,setErrorMessage ] = useState("");
   const [employeeExcelData,setEmployeeExcelData]=useState<any[]>([]);
   const [showDialogue,setShowDialogue] = useState(false)
-
   const user  = useSelector((state:any)=>state.user.currentUser)
-
+  const popupMessage = "Are You sure you want to export all data of "+selectedProjectName+" into excel?"
   useEffect(()=>{
     ProjectService.getProject().then((res)=>{
       setProjects(res.data);
@@ -100,7 +95,7 @@ function EmployeeList(this: any) {
   return (
 
       <div>
-        { showDialogue &&<ExportConfirmation setVisable = {setShowDialogue} projectName = {selectedProjectName} exportHandler = {onExportHandler}/>}
+        { showDialogue && <GeneralConfirmation setVisable = {setShowDialogue} message = {popupMessage} operationHandler = {onExportHandler}/>}
         
 
         <div className="displayFlex">

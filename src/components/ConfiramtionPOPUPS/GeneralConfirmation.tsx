@@ -17,7 +17,6 @@ const Container = styled.div`
   align-items: center;
   backdrop-filter: blur(1px);
   flex-direction: column;
-/* opacity: ${props =>props.isVisable ==="true" ? 1 :0.2};*/
 `
 const DialogBox = styled.div`
 height: 200px;
@@ -60,19 +59,20 @@ background-color: white;
 
 `
 
-const ExportConfirmation = ({setVisable ,projectName,exportHandler}) => {
+const GeneralConfirmation = ({setVisable ,message,operationHandler}:any) => {
+
   return (
     <Container >
     <DialogBox>
         <Head><CancelButton onClick={()=>{setVisable(false)}}><CancelIcon/></CancelButton></Head>
-        <Middle><WarningMessage><h4>Are You Sure You Want to export all the resource datails of {projectName} in Excel? </h4></WarningMessage></Middle>
+        <Middle><WarningMessage><h4>{message} </h4></WarningMessage></Middle>
         <Bottom>
             <button className='btn btn-danger' type='button' onClick={()=>{setVisable(false)}}>CANCEL</button>
-            <button className='btn btn-success' type='button' onClick={()=>{exportHandler();setVisable(false)}}>CONTINUE</button>
+            <button className='btn btn-success' type='button' onClick={()=>{operationHandler();setVisable(false)}}>CONTINUE</button>
         </Bottom>
     </DialogBox>
 </Container>
   )
 }
 
-export default ExportConfirmation
+export default GeneralConfirmation
